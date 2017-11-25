@@ -1,0 +1,24 @@
+.info {
+	background: #f0f0f0 none repeat scroll 0 0;
+	color: #fff;
+}
+.info ul {
+    list-style: outside none none;
+}
+.info ul li {
+   padding: 10px 45px;
+}
+
+.valid {
+	background: rgba(0, 0, 0, 0) url("https://s19.postimg.org/vq43s2wib/valid.png") no-repeat scroll 2px 6px;
+	color: green;
+	line-height: 21px;
+	padding-left: 22px;
+}
+
+.invalid {
+	background: rgba(0, 0, 0, 0) url("https://s19.postimg.org/olmaj1p8z/invalid.png") no-repeat scroll 2px 6px;
+	color: red;
+	line-height: 21px;
+	padding-left: 22px;
+}
