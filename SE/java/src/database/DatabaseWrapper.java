@@ -1,6 +1,7 @@
-package user;
+package database;
 
-import java.awt.*;
+import user.User;
+
 import java.sql.*;
 
 /**
@@ -50,6 +51,18 @@ public class DatabaseWrapper
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			try
+			{
+				conn.close();
+				stmt.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
 		
 		return null;
 	}
@@ -75,6 +88,18 @@ public class DatabaseWrapper
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				conn.close();
+				stmt.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		
 		return false;

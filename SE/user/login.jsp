@@ -21,12 +21,23 @@
             </div>
             <%
             }
-            
+            %>
+            <%
             if(request.getParameter("register") != null)
             {
             %>
             <div class="alert alert-success alert-dismissable fade in">
                 <strong>회원가입을 축하합니다!</strong> 아이디와 비밀번호를 입력하여 로그인해 주세요.
+            </div>
+            <%
+            }
+            %>
+            <%
+            if(request.getParameter("login") != null)
+            {
+            %>
+            <div class="alert alert-warning alert-dismissable fade in">
+                <strong>로그인 필요!</strong> 로그인해 주세요.
             </div>
             <%
             }

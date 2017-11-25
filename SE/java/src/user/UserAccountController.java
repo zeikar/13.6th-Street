@@ -1,5 +1,7 @@
 package user;
 
+import database.DatabaseWrapper;
+
 /**
  * Created by Zeikar on 2017-11-24.
  * 출처: http://all-record.tistory.com/115 [세상의 모든 기록]
@@ -13,21 +15,51 @@ public class UserAccountController
 	
 	public static String getUserName(String id)
 	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return "null";
+		}
 		return getUser(id).getName();
 	}
 	
 	public static String getUserAddress(String id)
 	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return "null";
+		}
 		return getUser(id).getAddress();
 	}
 	
 	public static String getUserPhoneNumber(String id)
 	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return "null";
+		}
 		return getUser(id).getPhoneNumber();
+	}
+	
+	public static int getUserPoint(String id)
+	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return -1;
+		}
+		return getUser(id).getPoint();
 	}
 	
 	public static boolean isUserAdmin(String id)
 	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return false;
+		}
 		return getUser(id).getUserType() == 1;
 	}
 	

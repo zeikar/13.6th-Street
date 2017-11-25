@@ -3,5 +3,6 @@
 	if(session.getAttribute("sessionID") != null)
 	{
 		response.sendRedirect("/SE/index.jsp?error");
+		return;
 	}
 %>

@@ -53,14 +53,21 @@
 		{
 		%>
 		<ul class="nav navbar-nav navbar-right">
-			<p class="navbar-text">
-			<%
-				out.write(UserAccountController.getUserName(userId) + "님 환영합니다!");
-			%>
-			</p>
-			<li> <a href="/SE/user/edituser.jsp"> <span class="glyphicon glyphicon-user"></span> 회원정보 수정 </a> </li>
-			<li> <a href="/SE/user/logout.jsp"> <span class="glyphicon glyphicon-log-in"></span> 로그아웃 </a> </li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<% out.write(UserAccountController.getUserName(userId) + "님 환영합니다!"); %>
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li> <a href="/SE/user/pointcharge.jsp"> <span class="glyphicon glyphicon-credit-card"></span> 포인트 충전 </a> </li>
+					<li> <a href="/SE/user/pointrefund.jsp"> <span class="glyphicon glyphicon-transfer"></span> 포인트 환급 </a> </li>
+					<li class="divider"></li>
+					<li> <a href="/SE/user/edituser.jsp"> <span class="glyphicon glyphicon-user"></span> 회원정보 수정 </a> </li>
+					<li> <a href="/SE/user/logout.jsp"> <span class="glyphicon glyphicon-log-in"></span> 로그아웃 </a> </li>					
+				</ul>
+			</li>
+
 			<% 
+			// 관리자 메뉴
 			if(UserAccountController.isUserAdmin(userId))
 			{
 			%>
@@ -70,7 +77,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="/SE/user/addseller.jsp">판매자 등록 승인</a></li>
 					<li><a href="/SE/user/blockuser.jsp">사용자 제재</a></li>
-					<li><a href="#">몰라</a></li>
+					<li><a href="/SE/user/deleteuser.jsp">사용자 삭제</a></li>
 				</ul>
 			</li>
 			<%

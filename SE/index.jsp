@@ -52,6 +52,18 @@ if(request.getParameter("logout") != null)
 <%
 }
 %>
+<%
+if(request.getParameter("admin") != null)
+{
+%>
+<div class="container">
+  <div class="alert alert-danger">
+      <strong>에러!</strong> 관리자 권한이 필요합니다.
+  </div>
+</div>
+<%
+}
+%>
 
 <div class="jumbotron text-center">
   <h1>Welcome To 13.6th Street!</h1>

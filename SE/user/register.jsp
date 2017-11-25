@@ -392,9 +392,6 @@ function idCheck(str)
 		if (this.readyState == 4 && this.status == 200) 
 		{
 			// document.getElementById("id_check").innerHTML=this.responseText;
-
-console.log(this.responseText);
-
 			//id_duplicate userid
 			if ( this.responseText == "OK" ) {
 				$('#id_duplicate').removeClass('invalid').addClass('valid');
