@@ -15,8 +15,8 @@
       <file leaf-file-name="UserAccountController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+            <state relative-caret-position="266">
+              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -35,13 +35,10 @@
       <file leaf-file-name="DatabaseWrapper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/DatabaseWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="157" column="47" lean-forward="false" selection-start-line="157" selection-start-column="47" selection-end-line="157" selection-end-column="47" />
+            <state relative-caret-position="3154">
+              <caret line="166" column="19" lean-forward="false" selection-start-line="166" selection-start-column="19" selection-end-line="166" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
-                <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
-                <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -312,9 +309,6 @@
           <caret line="92" column="30" lean-forward="false" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
-            <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
-            <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -337,21 +331,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state relative-caret-position="266">
+          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/DatabaseWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="157" column="47" lean-forward="false" selection-start-line="157" selection-start-column="47" selection-end-line="157" selection-end-column="47" />
+        <state relative-caret-position="3154">
+          <caret line="166" column="19" lean-forward="false" selection-start-line="166" selection-start-column="19" selection-end-line="166" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
-            <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
-            <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
           </folding>
         </state>
       </provider>

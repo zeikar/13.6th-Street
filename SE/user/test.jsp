@@ -1,7 +1,6 @@
-<%@ page import="jsptest.HelloTest" contentType="text/html; charset=UTF-8" %>
-<jsp:useBean id="jsptest" class="jsptest.HelloTest" scope="page" />
+<%@ page import="user.UserAccountController" contentType="text/html; charset=UTF-8" %>
 <html>
 <body>
-<%=jsptest.getName()%>
+<%=UserAccountController.getUserName((String)session.getAttribute("sessionID"))%>
 </body>
 </html>

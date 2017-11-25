@@ -9,30 +9,48 @@ import java.sql.*;
  */
 public class DatabaseWrapper
 {
-	private static Connection getConnection() throws ClassNotFoundException, SQLException
+	private static Connection getConnection()
 	{
 		Connection conn = null;
 		
 		//"jdbc:mysql://localhost:8080/SE?autoReconnect=true"
 		String jdbcurl = "jdbc:mysql://localhost:3306/SE?serverTimezone=UTC";
 		
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection(jdbcurl, "root", "capscaps12345");
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(jdbcurl, "root", "capscaps12345");
+		}
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
 		
 		return conn;
 	}
 	
-	private static ResultSet executeQuery(String query)
+	private static void releaseConnection(Connection conn)
 	{
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
 		try
 		{
-			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
+			conn.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private static ResultSet executeQuery(Connection conn, String query)
+	{
+		try
+		{
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
 			
 			if (rs.next())
 			{
@@ -43,63 +61,26 @@ public class DatabaseWrapper
 				return null;
 			}
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				conn.close();
-				stmt.close();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
 		}
 		
 		return null;
 	}
 	
-	private static boolean executeUpdateQuery(String query)
+	private static boolean executeUpdateQuery(Connection conn, String query)
 	{
-		Connection conn = null;
-		Statement stmt = null;
-		boolean res = false;
-		
 		try
 		{
-			conn = getConnection();
-			stmt = conn.createStatement();
-			res = (stmt.executeUpdate(query) != 0);
+			Statement stmt = conn.createStatement();
+			boolean res = (stmt.executeUpdate(query) != 0);
 			
 			return res;
-		}
-		catch (ClassNotFoundException e)
-		{
-			e.printStackTrace();
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				conn.close();
-				stmt.close();
-			}
-			catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
 		}
 		
 		return false;
@@ -110,7 +91,9 @@ public class DatabaseWrapper
 		String query = "SELECT * FROM User WHERE id = '" + id + "' AND password = '"
 				+ password + "'";
 		
-		ResultSet rs = executeQuery(query);
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		releaseConnection(conn);
 		
 		return rs != null;
 	}
@@ -119,7 +102,8 @@ public class DatabaseWrapper
 	{
 		String query = "SELECT * FROM User WHERE id = '" + id + "'";
 		
-		ResultSet rs = executeQuery(query);
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
 		
 		try
 		{
@@ -141,6 +125,10 @@ public class DatabaseWrapper
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			releaseConnection(conn);
+		}
 		
 		return null;
 	}
@@ -152,7 +140,11 @@ public class DatabaseWrapper
 				user.getName() + "','" + user.getEmail() + "','" + user.getAddress() + "','" +
 				user.getPhoneNumber() + "')";
 		
-		return executeUpdateQuery(query);
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
 	}
 	
 	public static boolean updateUserInfo(User user)
@@ -168,6 +160,10 @@ public class DatabaseWrapper
 				"isUserBlocked = '" + (user.isUserBlocked()?"1":"0") + "' " +
 				"WHERE id = '" + user.getId() + "'";
 		
-		return executeUpdateQuery(query);
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
 	}
 }
