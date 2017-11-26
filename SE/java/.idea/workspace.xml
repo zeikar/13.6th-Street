@@ -15,9 +15,13 @@
       <file leaf-file-name="UserAccountController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-              <folding />
+            <state relative-caret-position="661">
+              <caret line="147" column="9" lean-forward="true" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2562#2563#0" expanded="true" />
+                <element signature="e#2606#2607#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -25,8 +29,8 @@
       <file leaf-file-name="PointController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/user/PointController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="43" column="42" lean-forward="false" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+            <state relative-caret-position="637">
+              <caret line="50" column="37" lean-forward="false" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -35,10 +39,14 @@
       <file leaf-file-name="DatabaseWrapper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/DatabaseWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3154">
-              <caret line="166" column="19" lean-forward="false" selection-start-line="166" selection-start-column="19" selection-end-line="166" selection-end-column="19" />
+            <state relative-caret-position="547">
+              <caret line="209" column="16" lean-forward="true" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
+                <element signature="method#releaseConnection#0;class#DatabaseWrapper#0" expanded="false" />
+                <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
+                <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -47,8 +55,8 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/user/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="140" column="26" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="26" />
+            <state relative-caret-position="1786">
+              <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -71,10 +79,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/user/DatabaseWrapper.java" />
         <option value="$PROJECT_DIR$/src/user/User.java" />
         <option value="$PROJECT_DIR$/src/user/PointController.java" />
         <option value="$PROJECT_DIR$/src/user/UserAccountController.java" />
-        <option value="$PROJECT_DIR$/src/user/DatabaseWrapper.java" />
         <option value="$PROJECT_DIR$/src/database/DatabaseWrapper.java" />
       </list>
     </option>
@@ -99,10 +107,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -131,6 +136,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,9 +297,55 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2562#2563#0" expanded="true" />
+            <element signature="e#2606#2607#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/user/PointController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="43" column="42" lean-forward="false" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/user/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="74" column="4" lean-forward="true" selection-start-line="74" selection-start-column="4" selection-end-line="74" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/DatabaseWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="96" column="8" lean-forward="true" selection-start-line="96" selection-start-column="8" selection-end-line="96" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#releaseConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
           <caret line="42" column="4" lean-forward="false" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2562#2563#0" expanded="true" />
+            <element signature="e#2606#2607#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -309,40 +363,52 @@
           <caret line="92" column="30" lean-forward="false" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#releaseConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/user/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="140" column="26" lean-forward="false" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="26" />
+        <state relative-caret-position="1786">
+          <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/user/PointController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="43" column="42" lean-forward="false" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+        <state relative-caret-position="637">
+          <caret line="50" column="37" lean-forward="false" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/user/UserAccountController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="661">
+          <caret line="147" column="9" lean-forward="true" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2562#2563#0" expanded="true" />
+            <element signature="e#2606#2607#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/DatabaseWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3154">
-          <caret line="166" column="19" lean-forward="false" selection-start-line="166" selection-start-column="19" selection-end-line="166" selection-end-column="19" />
+        <state relative-caret-position="547">
+          <caret line="209" column="16" lean-forward="true" selection-start-line="209" selection-start-column="16" selection-end-line="209" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#getConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#releaseConnection#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeQuery#0;class#DatabaseWrapper#0" expanded="false" />
+            <element signature="method#executeUpdateQuery#0;class#DatabaseWrapper#0" expanded="false" />
           </folding>
         </state>
       </provider>

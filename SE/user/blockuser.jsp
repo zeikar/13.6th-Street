@@ -1,13 +1,19 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/user/admincheck.jsp"%>
 <%@include file="/common/header.jsp"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+
+<%
+    List<String> idList = UserAccountController.getReportedUserIdList();
+%>
 
 <div class="container">
     <div class="row">
         <h2>사용자 제재</h2>
         <hr />
         <div class="table-responsive">
-            <form class="form-inline" name="admin_user" action="" method="post">
+            <form class="form-inline" name="admin_user" action="blockuserproc.jsp" method="post">
 		    	<table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
@@ -18,27 +24,34 @@
                             <th>사용자 ID</th>
                             <th>이름</th>
                             <th>신고 접수일</th>
+                            <th>신고 내역</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <%
+                        int no = 0;
+                        for (String id :
+                                idList)
+                        {
+                            no++;
+                            String name = UserAccountController.getUserName(id);
+
+                            // 신고 접수일, 내역 추가 바람!
+                    %>
                         <tr>
                             <td>                                
-                                <label><input type="checkbox" name="permit" /> 사용자 제재</label>
+                                <label><input type="checkbox" name="block" value="<%=id%>"/> 사용자 제재</label>
                             </td>
-                            <td> 12 </td>
-                            <td> WA2000 </td>
-                            <td> 와쨩!</td>
+                            <td> <%=no%> </td>
+                            <td> <%=id%> </td>
+                            <td> <%=name%></td>
                             <td> <a href="#stay_here" data-placement="right" data-toggle="tooltip" title="2017년 11월 16일 17시 08분 12초">1주 전</a> </td>
-                        </tr> 
-                        <tr>
-                            <td>
-                                <label><input type="checkbox" name="permit" /> 사용자 제재</label>
-                            </td>
-                            <td> 3 </td>
-                            <td> UMP45 </td>
-                            <td> 움뀨 >,<</td>
-                            <td> <a href="#stay_here" data-placement="right" data-toggle="tooltip" title="2017년 11월 16일 17시 08분 12초">1주 전</a> </td>
-                        </tr> 
+                            <td> 움뀨 사랑해 </td>
+                        </tr>                       
+                    <%
+                    
+                        }
+                    %>
                     </tbody>
                 </table>
                 <hr />

@@ -13,11 +13,11 @@ public class User
 	private String phoneNumber;
 	private int point;
 	private String creditCardNumber;
-	private String backAccountNumber;
+	private String bankAccountNumber;
 	private int userType;
 	private boolean userBlocked;
 	
-	public User(String id, String password, String name, String email, String address, String phoneNumber, int point, String creditCardNumber, String backAccountNumber, int userType, boolean userBlocked)
+	public User(String id, String password, String name, String email, String address, String phoneNumber, int point, String creditCardNumber, String bankAccountNumber, int userType, boolean userBlocked)
 	{
 		this.id = id;
 		this.password = password;
@@ -27,7 +27,7 @@ public class User
 		this.phoneNumber = phoneNumber;
 		this.point = point;
 		this.creditCardNumber = creditCardNumber;
-		this.backAccountNumber = backAccountNumber;
+		this.bankAccountNumber = bankAccountNumber;
 		this.userType = userType;
 		this.userBlocked = userBlocked;
 	}
@@ -43,7 +43,7 @@ public class User
 		
 		this.point = 0;
 		this.creditCardNumber = "";
-		this.backAccountNumber = "";
+		this.bankAccountNumber = "";
 		this.userType = 0;
 		this.userBlocked = false;
 	}
@@ -128,14 +128,14 @@ public class User
 		this.creditCardNumber = creditCardNumber;
 	}
 	
-	public String getBackAccountNumber()
+	public String getBankAccountNumber()
 	{
-		return backAccountNumber;
+		return bankAccountNumber;
 	}
 	
-	public void setBackAccountNumber(String backAccountNumber)
+	public void setBankAccountNumber(String bankAccountNumber)
 	{
-		this.backAccountNumber = backAccountNumber;
+		this.bankAccountNumber = bankAccountNumber;
 	}
 	
 	public int getUserType()

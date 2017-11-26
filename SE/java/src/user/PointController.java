@@ -30,16 +30,29 @@ public class PointController
 		return updatePoint(user, -amount);
 	}
 	
-	public static boolean chargePoint(String id, int amount)
+	public static boolean chargePointWithCreditCard(String id, int amount, String payNumber)
 	{
 		User user = getUser(id);
+		
+		user.setCreditCardNumber(payNumber);
 		
 		return updatePoint(user, amount);
 	}
 	
-	public static boolean refundPoint(String id, int amount)
+	public static boolean chargePointWithBankAccount(String id, int amount, String payNumber)
 	{
 		User user = getUser(id);
+		
+		user.setBankAccountNumber(payNumber);
+		
+		return updatePoint(user, amount);
+	}
+	
+	public static boolean refundPoint(String id, int amount, String refundNumber)
+	{
+		User user = getUser(id);
+		
+		user.setBankAccountNumber(refundNumber);
 		
 		return updatePoint(user, -amount);
 	}

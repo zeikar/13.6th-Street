@@ -22,7 +22,23 @@
         <h2>사용자 삭제</h2>
         
         <%
-        if(search_id.equals(""))
+        if(request.getParameter("error") != null)
+        {
+        %>
+        <div class="alert alert-danger alert-dismissable fade in">
+            <strong><%=request.getParameter("error")%> 사용자 삭제 실패!</strong> 다시 확인해 주세요.
+        </div>
+        <%
+        }
+        else if(request.getParameter("success") != null)
+        {
+        %>
+        <div class="alert alert-success alert-dismissable fade in">
+            <strong><%=request.getParameter("success")%> 사용자 삭제 성공!</strong> 해당 사용자를 영구적으로 삭제하였습니다.
+        </div>
+        <%
+        }
+        else if(search_id.equals(""))
         {
         %>
         <div class="alert alert-warning alert-dismissable">
@@ -69,15 +85,16 @@
         if (!name.equals("null"))
         {
         %>
-        <div class="table-responsive">
-            <form class="form-inline" name="delete_user" action="" method="post">
+
+        <form class="form-inline" name="delete_user" action="deleteuserproc.jsp" method="post">
+            <div class="table-responsive">                
                 <input type="hidden" name="userid" value="<%=search_id%>" />
-		    	<table class="table table-striped table-hover table-bordered">
+                <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>사용자 ID</th>
                             <th>이름</th>
-                            <th>신고 접수일</th>
+                            <th>신고 접수일 - 업데이트 바람</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,11 +105,35 @@
                         </tr>                         
                     </tbody>
                 </table>
+
                 <hr />
-                <input type="submit" class="btn btn-success" value="선택한 사용자 삭제" />
+
+                <button type="button" id="pay_btn" class="btn btn-danger" data-toggle="modal" data-target="#myModal">해당 사용자 삭제</button>
                 <a href="deleteuser.jsp" class="btn btn-default" role="button">초기화</a>
-            </form>
-        </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">사용자 삭제 확인</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><%=name%> (ID : <%=search_id%>) 님을 13.6th Street에서 영구적으로 삭제합니다.</p>
+                        </div>
+                        <div class="modal-footer">   
+                            <p>정말로 삭제하시겠습니까?</p>
+                            <button type="submit" id="submit" class="btn btn-danger">삭제</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <%
         }
         else if(!search_id.equals(""))
@@ -107,5 +148,11 @@
         %>
     </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 
 <%@include file="/common/footer.jsp"%>

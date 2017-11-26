@@ -1,5 +1,3 @@
-<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
 <style type = "text/css">
 /* 사이드 리모컨 전체 */
 #sideMenu_all

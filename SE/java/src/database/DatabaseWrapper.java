@@ -3,6 +3,8 @@ package database;
 import user.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zeikar on 2017-11-24.
@@ -155,7 +157,7 @@ public class DatabaseWrapper
 				"phoneNumber = '" + user.getPhoneNumber() + "'," +
 				"point = '" + user.getPoint() + "'," +
 				"creditCardNumber = '" + user.getCreditCardNumber() + "'," +
-				"bankAccountNumber = '" + user.getBackAccountNumber() + "'," +
+				"bankAccountNumber = '" + user.getBankAccountNumber() + "'," +
 				"userType = '" + user.getUserType() + "'," +
 				"isUserBlocked = '" + (user.isUserBlocked()?"1":"0") + "' " +
 				"WHERE id = '" + user.getId() + "'";
@@ -165,5 +167,63 @@ public class DatabaseWrapper
 		releaseConnection(conn);
 		
 		return ret;
+	}
+	
+	public static boolean deleteUser(String id)
+	{
+		String query = "DELETE FROM User WHERE id = '" + id + "'";
+		
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
+	}
+	
+	// 추후에 업데이트 예정!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// 신고 유저, 신고 클래스 필요
+	public static List<User> getReportedUserList()
+	{
+		String query = "SELECT * FROM User";
+		
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		
+		List<User> userList = new ArrayList<>();
+		
+		try
+		{
+			if (rs != null)
+			{
+				do
+				{
+					User user = new User(rs.getString("id"), rs.getString("password"),
+						rs.getString("name"), rs.getString("email"), rs.getString("address"),
+						rs.getString("phoneNumber"),
+						rs.getInt("point"), rs.getString("creditCardNumber"),
+						rs.getString("bankAccountNumber"),
+						rs.getInt("userType"), rs.getInt("isUserBlocked") == 1);
+					
+					userList.add(user);
+				}
+				while(rs.next());
+				
+				return userList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+		}
+		
+		return null;
 	}
 }

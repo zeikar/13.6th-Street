@@ -2,6 +2,9 @@ package user;
 
 import database.DatabaseWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Zeikar on 2017-11-24.
  * 출처: http://all-record.tistory.com/115 [세상의 모든 기록]
@@ -60,7 +63,37 @@ public class UserAccountController
 		{
 			return false;
 		}
+		return getUser(id).getUserType() == 2;
+	}
+	
+	public static boolean isUserSeller(String id)
+	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return false;
+		}
 		return getUser(id).getUserType() == 1;
+	}
+	
+	public static String getUserCreditCardNumber(String id)
+	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return "null";
+		}
+		return getUser(id).getCreditCardNumber();
+	}
+	
+	public static String getUserBankAccountNumber(String id)
+	{
+		User user = getUser(id);
+		if(user == null)
+		{
+			return "null";
+		}
+		return getUser(id).getBankAccountNumber();
 	}
 	
 	public static boolean login(String id, String password)
@@ -94,5 +127,26 @@ public class UserAccountController
 		user.setPhoneNumber(phoneNumber);
 		
 		return DatabaseWrapper.updateUserInfo(user);
+	}
+	
+	public static boolean deleteUser(String id)
+	{
+		return DatabaseWrapper.deleteUser(id);
+	}
+	
+	// 추후에 업데이트 예정!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// 신고 유저, 신고 클래스 필요
+	public static List<String> getReportedUserIdList()
+	{
+		List<User> userList = DatabaseWrapper.getReportedUserList();
+		List<String> idList = new ArrayList<>();
+		
+		for (User user :
+				userList)
+		{
+			idList.add(user.getId());
+		}
+		
+		return idList;
 	}
 }
