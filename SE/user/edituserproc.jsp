@@ -21,12 +21,12 @@
 
         if(check == false)
         {
-            nextURL = "../index.jsp?error";
+            nextURL = "edituser.jsp?error";
         }
         // 정보수정 성공
         else
         {
-            nextURL = "../index.jsp?edit";
+            nextURL = "edituser.jsp?edit";
         }
 
         response.sendRedirect(nextURL);

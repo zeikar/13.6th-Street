@@ -1,4 +1,10 @@
 <%@ page import="user.UserAccountController" contentType="text/html; charset=UTF-8" %>
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
+<%@ page import="Order.OrderController" contentType="text/html; charset=UTF-8" %>
+<%@ page import="Pay.PayController" contentType="text/html; charset=UTF-8" %>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,6 +46,7 @@
 		
 		<%
 		String userId = (String)session.getAttribute("sessionID");
+		
 		if(userId == null)
 		{
 		%>
@@ -55,12 +62,38 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					바로가기 메뉴
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li> <a href="/SE/item/order_list.jsp"> <span class="glyphicon glyphicon-shopping-cart"></span> 장바구니 </a> </li>
+					<li> <a href="/SE/bbs/bbs.jsp"> <span class="glyphicon glyphicon-list-alt"></span> 게시판 </a> </li>
+					<li class="divider"></li>			
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<% out.write(UserAccountController.getUserName(userId) + "님 환영합니다!"); %>
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li> <a href="/SE/user/pointcharge.jsp"> <span class="glyphicon glyphicon-credit-card"></span> 포인트 충전 </a> </li>
 					<li> <a href="/SE/user/pointrefund.jsp"> <span class="glyphicon glyphicon-transfer"></span> 포인트 환급 </a> </li>
+					
 					<li class="divider"></li>
+<%
+			// 판매자 권한을 가진 유저의 메뉴
+			if (UserAccountController.isUserSeller(userId))
+			{
+%>
+					<li> <a href="/SE/item/item_supervise.jsp"> <span class="	glyphicon glyphicon-star"></span> 판매 물품 관리 </a> </li>
+					<li> <a href="/SE/item/item_sold_show.jsp"> <span class="	glyphicon glyphicon-star"></span> 판매 내역 보기 </a> </li>
+<%
+			}
+%>		
+					<li> <a href="/SE/item/item_pay_show.jsp"> <span class="	glyphicon glyphicon-star"></span> 물품 구매 내역 보기 </a> </li>
+					
+					<li class="divider"></li>
+					
 					<li> <a href="/SE/user/edituser.jsp"> <span class="glyphicon glyphicon-user"></span> 회원정보 수정 </a> </li>
 					<li> <a href="/SE/user/logout.jsp"> <span class="glyphicon glyphicon-log-in"></span> 로그아웃 </a> </li>					
 				</ul>
@@ -76,7 +109,9 @@
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li><a href="/SE/user/addseller.jsp">판매자 등록 승인</a></li>
+					<li><a href="/SE/item/item_reg_list.jsp">물품 판매 승인</a></li>
 					<li><a href="/SE/user/blockuser.jsp">사용자 제재</a></li>
+					<li><a href="/SE/user/unblockuser.jsp">사용자 제재 철회</a></li>
 					<li><a href="/SE/user/deleteuser.jsp">사용자 삭제</a></li>
 				</ul>
 			</li>

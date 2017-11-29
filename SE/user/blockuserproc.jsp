@@ -6,41 +6,34 @@
 </head>
 <body>
     <%
-
-        
-String[] sports; 
-sports = request.getParameterValues("block");
-   if (sports != null) 
-   {
-      for (int i = 0; i < sports.length; i++) 
-      {
-         out.println ("<b>"+sports[i]+"<b>");
-      }
-   }
-   else out.println ("<b>none<b>");
-
-   /*
         // 인코딩 처리
         request.setCharacterEncoding("utf-8"); 
         
         // 화면에 입력된 정보를 가져온다
-        String id = request.getParameter("userid");
-    
-        boolean check = UserAccountController.deleteUser(id);
+        String[] idList = request.getParameterValues("block");
         String nextURL = "";
 
-        // 실패
-        if(check == false)
+        if(idList == null)
         {
-            nextURL = "deleteuser.jsp?error=" + id;
+            nextURL = "blockuser.jsp?error";
         }
-        // 성공
         else
         {
-            nextURL = "deleteuser.jsp?success=" + id;
+            boolean check = UserAccountController.blockUser(idList);
+
+            // 실패
+            if(check == false)
+            {
+                nextURL = "blockuser.jsp?error";
+            }
+            // 성공
+            else
+            {
+                nextURL = "blockuser.jsp?success";
+            }
         }
 
-        response.sendRedirect(nextURL);*/
+        response.sendRedirect(nextURL);
     %>
 </body>
 </html>

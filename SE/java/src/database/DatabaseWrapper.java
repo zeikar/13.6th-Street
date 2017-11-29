@@ -1,5 +1,7 @@
 package database;
 
+import user.ReportUser;
+import user.SellerRequest;
 import user.User;
 
 import java.sql.*;
@@ -135,6 +137,80 @@ public class DatabaseWrapper
 		return null;
 	}
 	
+	public static SellerRequest getSellerRequest(String id)
+	{
+		String query = "SELECT * FROM Seller_request WHERE userId = '" + id + "'";
+		
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		
+		try
+		{
+			if (rs != null)
+			{
+				return new SellerRequest(rs.getString("userId"), rs.getInt("state"),
+						rs.getTimestamp("requestTime"), rs.getString("requestContent"));
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+		}
+		
+		return null;
+	}
+	
+	public static List<ReportUser> getReportUserList(String reportedUserId)
+	{
+		String query = "SELECT * FROM Report_user " +
+				"WHERE reported_user_id='" + reportedUserId + "'";
+		
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		
+		List<ReportUser> reportUserList = new ArrayList<>();
+		
+		try
+		{
+			if (rs != null)
+			{
+				do
+				{
+					ReportUser reportUser = new ReportUser(rs.getString("report_user_id"),
+							rs.getString("reported_user_id"), rs.getTimestamp("report_date"),
+							rs.getString("report_content"), rs.getString("report_reason"));
+					
+					reportUserList.add(reportUser);
+				}
+				while(rs.next());
+				
+				return reportUserList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+		}
+		
+		return null;
+	}
+	
 	public static boolean insertUserInfo(User user)
 	{
 		String query = "INSERT INTO User(id, password, name, email, address, phoneNumber)" +
@@ -180,16 +256,14 @@ public class DatabaseWrapper
 		return ret;
 	}
 	
-	// 추후에 업데이트 예정!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// 신고 유저, 신고 클래스 필요
-	public static List<User> getReportedUserList()
+	public static List<String> getReportedUserIdList()
 	{
-		String query = "SELECT * FROM User";
+		String query = "SELECT DISTINCT reported_user_id FROM Report_user";
 		
 		Connection conn = getConnection();
 		ResultSet rs = executeQuery(conn, query);
 		
-		List<User> userList = new ArrayList<>();
+		List<String> userIdList = new ArrayList<>();
 		
 		try
 		{
@@ -197,18 +271,13 @@ public class DatabaseWrapper
 			{
 				do
 				{
-					User user = new User(rs.getString("id"), rs.getString("password"),
-						rs.getString("name"), rs.getString("email"), rs.getString("address"),
-						rs.getString("phoneNumber"),
-						rs.getInt("point"), rs.getString("creditCardNumber"),
-						rs.getString("bankAccountNumber"),
-						rs.getInt("userType"), rs.getInt("isUserBlocked") == 1);
+					String userId = rs.getString("reported_user_id");
 					
-					userList.add(user);
+					userIdList.add(userId);
 				}
 				while(rs.next());
 				
-				return userList;
+				return userIdList;
 			}
 			else
 			{
@@ -225,5 +294,128 @@ public class DatabaseWrapper
 		}
 		
 		return null;
+	}
+	
+	public static List<String> getSellerRequestUserIdList()
+	{
+		String query = "SELECT userId FROM Seller_request where state = 0";
+		
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		
+		List<String> userIdList = new ArrayList<>();
+		
+		try
+		{
+			if (rs != null)
+			{
+				do
+				{
+					String userId = rs.getString("userId");
+					
+					userIdList.add(userId);
+				}
+				while(rs.next());
+				
+				return userIdList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+		}
+		
+		return null;
+	}
+	
+	public static List<String> getBlockedUserIdList()
+	{
+		String query = "SELECT id FROM User where isUserBlocked = 1";
+		
+		Connection conn = getConnection();
+		ResultSet rs = executeQuery(conn, query);
+		
+		List<String> userIdList = new ArrayList<>();
+		
+		try
+		{
+			if (rs != null)
+			{
+				do
+				{
+					String userId = rs.getString("id");
+					
+					userIdList.add(userId);
+				}
+				while(rs.next());
+				
+				return userIdList;
+			}
+			else
+			{
+				return null;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			releaseConnection(conn);
+		}
+		
+		return null;
+	}
+	
+	public static boolean updateSellerInfo(SellerRequest sellerRequest)
+	{
+		String query = "UPDATE Seller_request set " +
+				"state = '" + sellerRequest.getState() + "'," +
+				"requestTime = '" + sellerRequest.getRequestTime() + "'," +
+				"requestContent = '" + sellerRequest.getRequestContent() + "' " +
+				"WHERE userId = '" + sellerRequest.getUserId() + "'";
+		
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
+	}
+	
+	public static boolean insertSellerInfo(SellerRequest sellerRequest)
+	{
+		String query = "INSERT INTO Seller_request(userId, requestContent)" +
+				"VALUES('" + sellerRequest.getUserId() + "','" +
+				sellerRequest.getRequestContent() + "')";
+		
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
+	}
+	
+	public static boolean insertReportInfo(ReportUser reportUser)
+	{
+		String query = "INSERT INTO Report_user (report_user_id, reported_user_id, report_content, report_reason)" +
+				"VALUES('" + reportUser.getReportUserId() + "','" +
+				reportUser.getReportedUserId() + "','" +
+				reportUser.getReportContent() + "','" +
+				reportUser.getReportReason() + "')";
+		
+		Connection conn = getConnection();
+		Boolean ret = executeUpdateQuery(conn, query);
+		releaseConnection(conn);
+		
+		return ret;
 	}
 }

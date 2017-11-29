@@ -87,7 +87,7 @@
                         <label for="name" class="cols-sm-2 control-label">이름</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="name" id="name"  placeholder="이름을 입력하세요 (ex. 홍길동)" autocomplete="off"/>
                             </div>
                         </div>

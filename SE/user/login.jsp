@@ -23,6 +23,16 @@
             }
             %>
             <%
+            if(request.getParameter("blocked") != null)
+            {
+            %>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong>로그인 실패!</strong> 제재된 사용자입니다.
+            </div>
+            <%
+            }
+            %>
+            <%
             if(request.getParameter("register") != null)
             {
             %>

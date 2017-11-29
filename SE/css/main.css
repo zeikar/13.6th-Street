@@ -8,25 +8,3 @@ footer
 	padding-top: 10px; 
 	box-shadow: 0px 500px 0px 500px #f7f7f7;
 }
-
-.glyphicon.glyphicon-search.search_button
-{
-	font-size : 15pt;
-	color : #9D9D9D;
-}
-
-.glyphicon.glyphicon-search.search_button:hover
-{
-	cursor : pointer;
-	color : white;
-}
-
-.header_button
-{
-	color : #9D9D9D;
-}
-
-.header_button:hover
-{
-	color : white;
-}

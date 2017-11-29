@@ -22,6 +22,11 @@
         {
             nextURL = "login.jsp?fail";
         }
+        // 재제된 사용자
+        else if(UserAccountController.isUserBlocked(id))
+        {
+            nextURL = "login.jsp?blocked";
+        }
         // 로그인 성공
         else
         {

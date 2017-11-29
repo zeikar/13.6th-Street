@@ -11,6 +11,26 @@
 <div class="container">
     <div class="row">
         <h2>사용자 제재</h2>
+
+        <%
+        if(request.getParameter("error") != null)
+        {
+        %>
+        <div class="alert alert-danger alert-dismissable fade in">
+            <strong> 사용자 제재 실패!</strong> 다시 확인해 주세요.
+        </div>
+        <%
+        }
+        if(request.getParameter("success") != null)
+        {
+        %>
+        <div class="alert alert-success alert-dismissable fade in">
+            <strong> 사용자 제재 성공!</strong> 해당 사용자들을 제재하였습니다.
+        </div>
+        <%
+        }
+        %>
+
         <hr />
         <div class="table-responsive">
             <form class="form-inline" name="admin_user" action="blockuserproc.jsp" method="post">
@@ -22,21 +42,28 @@
                             </th>
                             <th>No.</th>
                             <th>사용자 ID</th>
-                            <th>이름</th>
+                            <th>신고자 ID</th>
                             <th>신고 접수일</th>
+                            <th>신고 이유</th>
                             <th>신고 내역</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <%
+                   <%
                         int no = 0;
                         for (String id :
                                 idList)
                         {
                             no++;
-                            String name = UserAccountController.getUserName(id);
+                            List<String> reportUserList = UserAccountController.getReportUserIdList(id);
+                            List<String> reportDateList = UserAccountController.getReportDateList(id);
+                            List<String> reportContentList = UserAccountController.getReportContentList(id);
+                            List<String> reportReasonList = UserAccountController.getReportReasonList(id);
 
-                            // 신고 접수일, 내역 추가 바람!
+                            for (int i = 0; i < reportUserList.size(); ++i)
+                            {
+                                if(i == 0)
+                                {
                     %>
                         <tr>
                             <td>                                
@@ -44,12 +71,28 @@
                             </td>
                             <td> <%=no%> </td>
                             <td> <%=id%> </td>
-                            <td> <%=name%></td>
-                            <td> <a href="#stay_here" data-placement="right" data-toggle="tooltip" title="2017년 11월 16일 17시 08분 12초">1주 전</a> </td>
-                            <td> 움뀨 사랑해 </td>
+                            <td> <%=reportUserList.get(i)%></td>
+                            <td> <%=reportDateList.get(i)%> </td>
+                            <td> <%=reportReasonList.get(i)%> </td>
+                            <td> <%=reportContentList.get(i)%> </td>
                         </tr>                       
                     <%
-                    
+                                }
+                                else
+                                {
+                    %>
+                            <td> </td>
+                            <td> </td>
+                            <td> <%=id%> </td>
+                            <td> <%=reportUserList.get(i)%></td>
+                            <td> <%=reportDateList.get(i)%> </td>
+                            <td> <%=reportReasonList.get(i)%> </td>
+                            <td> <%=reportContentList.get(i)%> </td>
+
+                    <%
+                                    
+                                }
+                            }
                         }
                     %>
                     </tbody>

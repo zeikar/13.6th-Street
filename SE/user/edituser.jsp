@@ -11,6 +11,38 @@
                     <hr />
                 </div>
             </div> 
+
+			<%
+            if(request.getParameter("error") != null)
+            {
+            %>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong>판매자 등록 실패!</strong> 다시 확인해 주세요.
+            </div>
+            <%
+            }
+            %>
+			<%
+            if(request.getParameter("seller") != null)
+            {
+            %>
+            <div class="alert alert-success alert-dismissable fade in">
+                <strong>판매자 등록 신청 완료!</strong> 관리자가 승인할 때까지 기다려 주세요.
+            </div>
+            <%
+            }
+            %>
+			<%
+            if(request.getParameter("edit") != null)
+            {
+            %>
+            <div class="alert alert-success alert-dismissable fade in">
+                <strong>회원 정보 수정 완료!</strong>
+            </div>
+            <%
+            }
+            %>
+
             <div class="main-login main-center">
                 <form method="post" action="edituserproc.jsp"
                  onsubmit="return validateForm()">
@@ -87,6 +119,52 @@
                     </div>         
                 </form>
             </div>
+
+			<hr />
+
+			<%
+			String requestState = UserAccountController.getUserSellerState(userId);
+
+			if(UserAccountController.isUserAdmin(userId))
+			{
+			%>
+				<button class="btn btn-info btn-block" disabled>관리자 계정입니다.</button>
+			<%
+			}
+			else if(UserAccountController.isUserSeller(userId))
+			{
+			%>			
+				<button class="btn btn-info btn-block" disabled>판매자 계정입니다.</button>
+			<%
+			}
+			else if(!requestState.equals("null"))
+			{
+			%>
+				<button class="btn btn-info btn-block" disabled><%=requestState%></button>
+			<%	
+			}
+			else
+			{
+			%>
+			<div class="form-group">
+				<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#demo">판매자 등록 신청</button>
+			</div>
+			
+			<div id="demo" class="collapse">
+				<form method="post" action="sellerrequest.jsp" onsubmit="return requestValidateForm()">
+					<div class="form-group">
+						<input type="text" class="form-control" id="request_content" name="request_content" placeholder="판매자 등록 신청 내역을 입력하세요.">
+					</div>
+					<div class="form-group">
+                        <button type="submit" id="request_submit" class="btn btn-danger btn-lg btn-block">등록 신청</button>
+                    </div>
+				</form>
+			</div>
+
+
+			<%
+			}
+			%>
         </div>
     </div>
 </div>
@@ -112,20 +190,6 @@ $(document).ready(function(){
 			$('#pw_valid').removeClass('valid').addClass('invalid');
 		}
 		
-		//validate letter
-		/*if ( pswd.match(/[A-z]/) ) {
-			$('#letter').removeClass('invalid').addClass('valid');
-		} else {
-			$('#letter').removeClass('valid').addClass('invalid');
-		}*/
-
-		//validate capital letter
-		/*if ( pswd.match(/[A-Z]/) ) {
-			$('#capital').removeClass('invalid').addClass('valid');
-		} else {
-			$('#capital').removeClass('valid').addClass('invalid');
-		}*/
-
 		//validate number
 		if ( pswd.match(/\d/) ) {
 			$('#number').removeClass('invalid').addClass('valid');
@@ -133,13 +197,6 @@ $(document).ready(function(){
 			$('#number').removeClass('valid').addClass('invalid');
 		}
 		
-		//validate space
-		/*if ( pswd.match(/[^a-zA-Z0-9\-\/]/) ) {
-			$('#space').removeClass('invalid').addClass('valid');
-		} else {
-			$('#space').removeClass('valid').addClass('invalid');
-		}*/
-
 		//validate the equal
 		if ( pswd == confirm ) {            
 			$('#equal').removeClass('invalid').addClass('valid');
@@ -233,6 +290,20 @@ function validateForm()
 
 	$('#submit').text("회원 정보 수정 중...");
 	$('#submit').prop('disabled', true);
+	return true;
+}
+
+function requestValidateForm()
+{
+	if($('#request_content').val() == '')
+	{
+		alert("판매자 신청 내역을 입력하세요");
+		$('#request_content').focus();
+		return false;
+	}
+
+	$('#request_submit').text("판매자 등록 신청 중...");
+	$('#request_submit').prop('disabled', true);
 	return true;
 }
 </script>

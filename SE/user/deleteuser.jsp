@@ -82,7 +82,7 @@
 
         String name = UserAccountController.getUserName(search_id);
 
-        if (!name.equals("null"))
+        if (!name.equals("null") && !name.equals("관리자"))
         {
         %>
 

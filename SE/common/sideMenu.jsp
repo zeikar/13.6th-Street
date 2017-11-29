@@ -152,8 +152,7 @@
 	
 	function gotoCartMain()
 	{
-		alert('장바구니로 이동');
-		window.location.href = "#";
+		window.location.href = "/SE/item/order_list.jsp";
 	}
 	
 	function gotoDown()

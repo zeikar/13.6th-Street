@@ -193,4 +193,5 @@ $(document).ready(function() {
 
 </script>
 
+<%@include file="/common/sideMenu.jsp"%>
 <%@include file="/common/footer.jsp"%>

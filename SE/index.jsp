@@ -27,19 +27,6 @@ if(request.getParameter("login") != null)
 }
 %>
 <%
-if(request.getParameter("edit") != null)
-{
-%>
-<div class="container">
-  <div class="alert alert-success alert-dismissable fade in">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
-    <strong>성공!</strong> 정보 수정이 완료되었습니다.
-  </div>
-</div>
-<%
-}
-%>
-<%
 if(request.getParameter("logout") != null)
 {
 %>
