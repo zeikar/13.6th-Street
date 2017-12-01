@@ -18,43 +18,25 @@
 	
 	Item temp;
 	
-	for (int i = 0; i < maxNumber; i++)
-	{
-		temp = ItemController.getItem(request.getParameter("item" + i));
-		
-		if (temp != null)
-			itemList.add(temp);
-		
-		OrderController.pay(reqUserId, itemList, totalPrice);
-	}
-%>
-	<div style = "text-align : center;">
-<%
 	try
 	{
-%>
-		주문이 완료 되었습니다! <br><br>
+		for (int i = 0; i < maxNumber; i++)
+		{
+			temp = ItemController.getItem(request.getParameter("item" + i));
+			
+			if (temp != null)
+				itemList.add(temp);
+		}
 		
-		<form action = "/SE/item/order_list.jsp">
-			<button> 장바구니 화면으로 </button>
-		</form>
 		
-		<form action = "/SE/index.jsp">
-			<button> 메인 화면으로 </button>
-		</form>
-<%
+		OrderController.pay(reqUserId, itemList, totalPrice);
+
+		
+		response.sendRedirect("order_list.jsp?paySuccess");
 	}
 	
 	catch (Exception e)
 	{
-		out.println("Class name : " + e.getStackTrace().getClass().getName() + "<br>");
-		out.println(e.toString());
+		response.sendRedirect("order_list.jsp?payFailed");
 	}
 %>
-	</div>
-
-<%@include file="/common/sideMenu.jsp"%>
-<%@include file="/common/footer.jsp"%>
-
-</body>
-</html>

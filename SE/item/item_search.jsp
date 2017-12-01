@@ -17,18 +17,28 @@
 	
 	String search_option_type = request.getParameter("search_type");
 	
-	if (search_option_type == "null" || search_option_type == null)
+	if (search_option_type == null)
+		search_option_type = "All";
+	
+	else if (search_option_type.equals(""))
 		search_option_type = "All";
 	
 	String search_option_price = request.getParameter("search_price");
 	
-	if (search_option_price == "null" || search_option_price == null)
+	if (search_option_price == null)
+		search_option_price = "0";
+	
+	else if (search_option_price.equals("null") || search_option_price.equals(""))
 		search_option_price = "0";
 	
 	String search_option_seller_id = request.getParameter("search_seller_id");
 	
-	if (search_option_seller_id == "")
-		search_option_seller_id = null;
+	if (search_option_seller_id == null)
+		search_option_seller_id = "";
+	
+	else if (search_option_seller_id.equals("null") || search_option_seller_id.equals(""))
+		search_option_seller_id = "";
+	
 %>
 
 <style>
@@ -93,6 +103,46 @@ function price_init()
 		<section class="content">
 			<h1> 물품 검색 결과 </h1>
 			
+<%
+            if(request.getParameter("item_orderSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong>장바구니</strong>에 등록되었습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_orderDuplicate") != null)
+            {
+%>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong>자신이 등록한 상품을 </strong> 장바구니에 넣을 수 없습니다!
+            </div>
+<%
+            }
+			
+            if(request.getParameter("item_orderFailed") != null)
+            {
+%>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong> 이미 주문된 상품 </strong> 입니다!
+            </div>
+<%
+            }
+			
+			
+			if (request.getParameter("LoginFailed") != null)
+			{
+%>
+			<div class="alert alert-danger alert-dismissable fade in">
+                <strong> 로그인 </strong> 하세요!!
+            </div>
+<%
+			}
+%>
+			
+			
 			<div class = "row" style = "height : 30px;"> </div>
 			
 			<div class="col-md-10 col-md-offset-1">
@@ -145,7 +195,8 @@ function price_init()
 												<button class="btn btn-default"> 가격 </button>
 											</div>
 											
-											<input id = "search_option_price" name = "search_price" type="text" class="form-control" placeholder="상한 가격 입력" style = "text-align : right" value = "<%= search_option_price %>"
+											<input id = "search_option_price" name = "search_price" min = "0"
+												   type="number" class="form-control" placeholder="상한 가격 입력" style = "text-align : right" value = "<%= search_option_price %>"
 												   onclick = "price_init()">
 										</div>
 									</div>
@@ -156,7 +207,7 @@ function price_init()
 												<button class="btn btn-default"> 판매자 </button>
 											</div>
 											
-											<input name = "search_seller_id" type="text" class="form-control" placeholder="판매자 이름">
+											<input name = "search_seller_id" type="text" class="form-control" placeholder="판매자 이름" value = "<%= search_option_seller_id %>">
 										</div>
 									</div>
 								</div>
@@ -177,7 +228,10 @@ function price_init()
 	try
 	{		
 		ArrayList<Item> searchList = new ArrayList<Item>();
-		int maxPrice = Integer.parseInt(search_option_price);		
+		int maxPrice = Integer.parseInt(search_option_price);
+		
+		if (search_option_seller_id == "")
+			search_option_seller_id = null;
 		
 		if (search_option_type.equals("All") && search_option_price == "0" && search_option_seller_id == null)
 		{
@@ -207,9 +261,33 @@ function price_init()
 		
 		if (searchFlag)
 		{
+			if (!search_option_type.equals("All"))
+			{
 %>
-			종류(<%=search_option_type%>), 최고 가격(<%=maxPrice%>), 판매자 id (<%=search_option_seller_id%>) 로 상세 검색한 결과입니다.
-<%		
+				종류 (<%=search_option_type%>)
+<%
+			}
+			
+			if (maxPrice != 0)
+			{
+%>
+				최고 가격(<%=maxPrice%>)
+<%
+			}
+			
+			if (search_option_seller_id != null)
+			{
+%>
+				판매자 id (<%=search_option_seller_id%>)
+<%
+			}
+
+			if (!(search_option_type.equals("All") && maxPrice == 0 && search_option_seller_id == null))
+			{
+%>
+				로 상세 검색한 결과입니다.
+<%
+			}
 		}
 		for (Item itor : searchList)
 		{
@@ -231,7 +309,7 @@ function price_init()
 													<p> 판매자 : <%= itor.itemRegUserId %> </p>
 													
 													<div class = "pull-right">
-														<%= itor.price %>원
+														<%= itor.price %> 포인트
 													</div>
 												</div>
 												
@@ -243,22 +321,40 @@ function price_init()
 										
 										<td class = "align-middle">
 <%
+			String options = "itemId=" + itor.getId() + "&search_text=" + search_value;
+			
+			if (!search_option_type.equals("All"))
+				options = options + "&search_type=" + search_option_type;
+			
+			if (maxPrice != 0)
+				options = options + "&search_price=" + maxPrice;
+			
+			if (search_option_seller_id != null)
+				options = options + "&search_seller_id=" + search_option_seller_id;
+
 			if (LoginedUser != null)
 			{
 %>
-											<form action = "/SE/item/item_order.jsp" method = "post">
-												<input type = "hidden" name = "itemId" value = "<%=itor.getId()%>">
-												<input type = "hidden" name = "postPage" value = "<%=request.getRequestURI()%>">
-												<input type = "hidden" name = "searchName" value = "<%=search_value%>">
+											<form action = "/SE/item/item_order.jsp?<%=options%>" method = "post">
 												<button class="btn btn-default" type="submit" title = "장바구니에 담기"> <i class="glyphicon glyphicon-shopping-cart"></i> </button> <br>
 											</form>
 <%
 			}
-%>							
-											<form action = "/SE/item/item_show_detail.jsp" method = "post">
-												<input type = "hidden" name = "itemId" value = "<%=itor.getId()%>">
-												<input type = "hidden" name = "postPage" value = "<%=request.getRequestURI()%>">
-												<input type = "hidden" name = "searchName" value = "<%=search_value%>">
+			
+			if (!searchFlag)
+			{
+%>				
+											<form action = "/SE/item/item_show_detail.jsp?itemId=<%=itor.getId()%>&search_text=<%=search_value%>" method = "post">
+<%
+			}
+			
+			else
+			{
+%>
+											<form action = "/SE/item/item_show_detail.jsp?<%=options%>" method = "post">
+<%
+			}
+%>
 												<button class="btn btn-default" type="submit" title = "자세히 보기"> <i class="glyphicon glyphicon-search"></i> </button>
 											</form>
 										</td>

@@ -49,6 +49,65 @@ function selectItem(strId, itemId)
 		<section class="content">
 			<h1> 장바구니 </h1>
 			
+<%
+            if(request.getParameter("paySuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 결제 </strong>를 성공적으로 마쳤습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("payFailed") != null)
+            {
+%>
+			<div class="alert alert-danger alert-dismissable fade in">
+                <strong> 결제 </strong>에 실패하였습니다.
+            </div>
+<%
+            }
+%>
+
+
+
+
+<%
+            if(request.getParameter("deleteSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 주문 </strong>을 제거하였습니다!
+            </div>
+<%
+            }
+
+            if(request.getParameter("deleteFailed") != null)
+            {
+%>
+			<div class="alert alert-danger alert-dismissable fade in">
+                <strong> 주문 </strong>을 제거하는데 실패하였습니다.
+            </div>
+<%
+            }
+%>
+
+
+
+
+<%
+            if(request.getParameter("underflow") != null)
+            {
+%>
+			<div class="alert alert-danger alert-dismissable fade in">
+                <strong> 최소 </strong> 하나의 주문을 선택하셔야 합니다.
+            </div>
+<%
+            }
+%>
+
+
+			
 			<div class = "row" style = "height : 30px;"> </div>
 			
 			<div class="col-md-10 col-md-offset-1">
@@ -100,13 +159,16 @@ function selectItem(strId, itemId)
 									</tr>
 <%
 		}
+		
+		else
+		{
 %>
 						<div class = "table-container">
 							<table class="table table-filter">
 								<tbody>
 <%
-		for (Order itor : orderList)
-		{
+			for (Order itor : orderList)
+			{
 %>
 										<tr class = "itemTable" id = "item<%= numbering%>th">
 											<td>
@@ -133,9 +195,8 @@ function selectItem(strId, itemId)
 											</td>
 											
 											<td class = "align-middle">				
-												<form action = "/SE/item/item_show_detail.jsp" method = "post">
+												<form action = "/SE/item/item_show_detail.jsp?cart" method = "post">
 													<input type = "hidden" name = "itemId" value = "<%=itor.orderItem.getId()%>">
-													<input type = "hidden" name = "postPage" value = "<%=request.getRequestURI()%>">
 													<button class="btn btn-default" type="submit" title = "자세히 보기"> <i class="glyphicon glyphicon-search"></i> </button>
 												</form>
 												
@@ -151,8 +212,8 @@ function selectItem(strId, itemId)
 											</td>
 										</tr>
 <%
-			numbering++;
-		}
+				numbering++;
+			}
 %>
 										<tr>
 											<td class = "pull-right">
@@ -161,18 +222,19 @@ function selectItem(strId, itemId)
 													
 													<input type = "hidden" name = "listMaxNumber" value = "<%=numbering%>">
 <%
-		for (int i = 0; i < numbering; i++)
-		{
+			for (int i = 0; i < numbering; i++)
+			{
 %>
 													<input type = "hidden" id = "item<%=i%>thValue" name = "item<%=i%>">
 <%
-		}
+			}
 %>
 												</form>
 											</td>
 										</tr>
 									</form> 
 <%
+		}
 	}
 	
 	catch (Exception e)

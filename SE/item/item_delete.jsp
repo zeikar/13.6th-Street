@@ -17,7 +17,7 @@
 	if (str != null)
 	{		
 		for (int i = 0; i < str.length; i++)
-		{			
+		{	
 			checker = ItemController.deleteItem(reqUserId, str[i]);
 			
 			if (!checker)	
@@ -27,27 +27,16 @@
 	
 	if (checker)
 	{
-%>
-	<div style = "text-align : center;">
-		선택한 아이템들이 제거되었습니다. <br><br>
-<%
+		String nextURL = "item_supervise.jsp?item_deleteSuccess";
+		response.sendRedirect(nextURL);
 	}
 	
 	else
 	{
-%>
-	<div style = "text-align : center;">
-		물품 정보 수정 권한이 없습니다. <br><br>
-<%
+		String nextURL = "item_supervise.jsp?item_deleteFailed";
+		response.sendRedirect(nextURL);
 	}
 %>
-		<form action = "/SE/item/item_supervise.jsp">
-			<button> 확인 </button>
-		</form>
-	</div>
 
 <%@include file="/common/sideMenu.jsp"%>
 <%@include file="/common/footer.jsp"%>
-
-</body>
-</html>

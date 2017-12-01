@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style type = "text/css">
 /* 사이드 리모컨 전체 */
 #sideMenu_all
@@ -157,12 +159,14 @@
 	
 	function gotoDown()
 	{
-		alert('아래로');
+		$('html, body').animate({ scrollTop: $(document).height()},800);
+		return false;
 	}
 	
 	function gotoUp()
 	{
-		alert('위로');
+		$( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+		return false;
 	}
 	</script>
 

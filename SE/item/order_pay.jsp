@@ -43,32 +43,14 @@
 			itemList.add(temp);
 		}
 	}
+	
+	if (itemList.size() == 0)
+		response.sendRedirect("/SE/item/order_list.jsp?underflow");
 %>
 
 <div class="container">
     <div class="row">
         <h2> 상품 결제 </h2>
-
-        <%
-        if(request.getParameter("success") != null)
-        {
-        %>
-        <div class="alert alert-success alert-dismissable fade in">
-            <strong> 결제 완료! </strong> 저희 13.6th Street를 이용해 주셔서 감사합니다.
-        </div>
-        <%
-        }
-        %>
-        <%
-        if(request.getParameter("error") != null)
-        {
-        %>
-        <div class="alert alert-danger alert-dismissable fade in">
-            <strong>결제에 실패하였습니다.</strong> 다시 한 번 확인해 주시기 바랍니다.
-        </div>
-        <%
-        }
-        %>
         
         <hr />
 		

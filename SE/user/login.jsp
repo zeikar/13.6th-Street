@@ -53,9 +53,8 @@
             }
             %>
             <div class="main-login main-center">
-                <form method="post" action="loginproc.jsp"
-                 onsubmit="return validateForm()">
-                    
+                <form method="post" action="loginproc.jsp" onsubmit="return validateForm()">
+                    <input type="hidden" name="next" value="<%=request.getParameter("next")%>">
                     <div class="form-group">
                         <label for="userid" class="cols-sm-2 control-label">ID</label>
                         <div class="cols-sm-10">

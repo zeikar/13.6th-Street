@@ -7,6 +7,10 @@
 #search{
 width: 50%;
 }
+#option{
+width: 20%;
+}
+
 </style>
 
 <div class="container">
@@ -29,8 +33,10 @@ width: 50%;
     </thead>
     
     <% 
+    	request.setCharacterEncoding("utf-8"); // 인코딩
     	int id;
     	int row = 0;
+    	String PageNum_temp = request.getParameter("PageNum");
     	
     	Connection conn = null;
         Statement stmt = null;
@@ -42,7 +48,8 @@ width: 50%;
            Class.forName("com.mysql.jdbc.Driver");
            conn = DriverManager.getConnection(jdbcurl, "root", "capscaps12345");
            stmt = conn.createStatement(); // 질의를 위한 Stmt 객체 생성.
-           String sql = "select * from Article order by article_id asc";
+           String sql = "select * from Article order by cast(article_id as unsigned)";
+           // "select * from Article order by article_id asc";
            // 검색하고 내림차순으로 글들 정렬. 
            rs = stmt.executeQuery(sql);
         } // 데이터의 접근 권한 획득. 
@@ -99,9 +106,20 @@ width: 50%;
   <span class="glyphicon glyphicon-search"></span> 검색
 </button>
 <div id="search" class="collapse">
-<form>
+<form name ="search" method = "post" action="search_DB.jsp">
+<div class="form-group">
+<label for="sel1"></label>
+  <select class="form-control" name="option" id="option">
+  	 <!-- 검색 옵션 -->
+    <option>글쓴이</option>
+    <option>제목</option>
+    <option>내용</option>
+  </select>
+</div>
   <div class="input-group" id ="search">
-    <input type="text" class="st-default-search-input form-control" placeholder="Search">
+    <input type="text" class="st-default-search-input form-control" placeholder="Search"
+    name = "searching" id = "searching">
+    <!-- 검색하려는 내용 -->
     <div class="input-group-btn">
       <button class="btn btn-default" type="submit">
         <i class="glyphicon glyphicon-search"></i>
@@ -112,9 +130,9 @@ width: 50%;
  </div>
  
   <div class="text-center">
-  <ul class="pagination", >
+  <ul class="pagination">
     <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
+    <li><a href="bbs2.jsp">2</a></li>
     <li><a href="#">3</a></li>
     <li><a href="#">4</a></li>
     <li><a href="#">5</a></li>

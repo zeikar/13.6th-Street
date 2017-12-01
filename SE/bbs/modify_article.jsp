@@ -2,6 +2,23 @@
 <%@include file="/common/header.jsp"%>
 <%@ page import = "java.sql.*"%>
 
+<script> // 내용의 value값이 없으면 작성을 막는다. 
+function restrict(){
+	
+	var subject = document.getElementsByName("subject")[0].value;
+	var pw = document.getElementsByName("password")[0].value;
+	var context = document.getElementsByName("content")[0].value;
+	
+	if(subject == "" || pw == "" || context == "")
+		{ // 아무것도 입력되지 않았다면. 
+			alert("입력하지 않은 항목이 있습니다!");
+		}
+	else{ // 입력되었으면 전송.
+		$("#Articleform").submit();
+	}
+}
+</script>
+
 <%
     Connection conn = null;
     Statement stmt = null;
@@ -50,7 +67,7 @@
   <strong>주의!</strong> 이용 약관을 위반한 게시글은 경고 없이 삭제됩니다!
 	</div>
 	
-<form method="post" action="modify_article_DB.jsp">
+<form name = "Articleform" id = "Articleform"  method="post" action="modify_article_DB.jsp">
     <!--처리하는 페이지로 정보를 보낸다! -->
    <table class="table table-bordered" width="700" border="3" bordercolor="lightgray" align="center">
             <tr>
@@ -81,18 +98,12 @@
             </td>    
         </tr>
     </table>    
-
-	<input type="hidden" name ="id" id ="id" value="<%=request.getParameter("id")%>">
-	<button type="submit" name = "submit" class="btn btn-info">
+    <input type="hidden" name ="id" id ="id" value="<%=request.getParameter("id")%>">
+ 	</form>
+ 	
+	<button type="button" name = "submit" class="btn btn-info" onClick = "restrict()">
  	<span class="glyphicon glyphicon-write"></span> 완료
 	</button>
- 	
- 	<% 
- 	// String flag = request.getParameter()
- 	
- 	%>
- 	
- 	</form>
 	
 	<a href="bbs.jsp">
 	<button type="button" class="btn btn-danger">

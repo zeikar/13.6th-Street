@@ -2,7 +2,10 @@
 
 <%@include file="/common/header.jsp"%>
 
+<%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>
+
 <%@ page import="Order.OrderController" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.net.URLEncoder" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -10,37 +13,81 @@
 	String reqUserId = (String)session.getAttribute("sessionID");
 	
 	String reqItemId = request.getParameter("itemId");	
-	String postPageUrl = request.getParameter("postPage");
-	String search_text = request.getParameter("searchName");
 	
-	boolean checker = OrderController.orderItem(reqUserId, reqItemId);
-%>
-	<div style = "text-align : center;">
-<%
+	String search_value = request.getParameter("search_text");
+	String encodeValue = URLEncoder.encode(search_value);
+	
+	String search_type = request.getParameter("search_type");
+	
+	String inputValue = request.getParameter("search_price");
+	
+	String ishome = request.getParameter("home");
+	String iscart = request.getParameter("cart");
+	
+	int search_price = 0;
+	
+	if (inputValue != null && !inputValue.equals("0"))
+		search_price = Integer.parseInt(inputValue);
+		
+	String search_seller = request.getParameter("search_seller_id");
+	
+	String url = "/SE/item/item_search.jsp?search_text=" + encodeValue;
+	
+	if (ishome != null)
+		url = "/SE/item/item_search.jsp?search_text=";
+		
+	else
+	{
+		if (search_type != null)
+			url = url + "&search_type=" + search_type;
+		
+		if (search_price > 0)
+			url = url + "&search_price=" + search_price;
+		
+		if (search_seller != null)
+		{
+			String encodeSellerId = URLEncoder.encode(search_seller);
+			url = url + "&search_seller_id=" + encodeSellerId;
+		}
+	}
+	
+	String item_reg_user = ItemController.getItem(reqItemId).itemRegUserId;
+	
+	boolean checker = false;
+	
 	try
 	{
-		if (checker)
+		if (iscart != null)
+			response.sendRedirect("/SE/item/order_list.jsp");
+	
+		// 중복
+		if (item_reg_user.equals(reqUserId))
 		{
-%>
-			장바구니에 등록되었습니다. <br><br>
-			
-			<form action = "<%= postPageUrl%>">
-				<input type = "hidden" name = "search_text" value = "<%= search_text %>">
-				<button> 확인 </button>
-			</form>
-<%
+			url = url + "&LoginFailed";
+			response.sendRedirect(url);
 		}
 		
+		else if (reqUserId == null)
+		{
+			url = url + "&item_orderDuplicate";
+			response.sendRedirect(url);
+		}
+		 
 		else
 		{
-%>
-			이미 장바구니에 존재하는 상품이거나 존재하지 않는 상품입니다. <br><br>
+			checker = OrderController.orderItem(reqUserId, reqItemId);
 			
-			<form action = "<%= postPageUrl%>">
-				<input type = "hidden" name = "search_text" value = "<%= search_text %>">
-				<button> 확인 </button>
-			</form>
-<%
+			if (checker)
+			{
+				url = url + "&item_orderSuccess";
+				response.sendRedirect(url);
+			}
+			
+			else
+			{
+				url = url + "&item_orderFailed";
+				response.sendRedirect(url);
+			}
 		}
 	}
 	
@@ -50,10 +97,3 @@
 		out.println(e.toString());
 	}
 %>
-	</div>
-
-<%@include file="/common/sideMenu.jsp"%>
-<%@include file="/common/footer.jsp"%>
-
-</body>
-</html>

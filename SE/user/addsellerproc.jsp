@@ -13,44 +13,52 @@
         String[] idList = request.getParameterValues("seller");
         String flag = request.getParameter("flag");
         String nextURL = "";
+  
+		if(flag.equals("true"))
+		{
+			if(idList == null)
+			{
+				nextURL = "addseller.jsp?error";
+			}
+			else
+			{
+				boolean check = UserAccountController.addSeller(idList);
 
-        if(idList == null)
-        {
-            nextURL = "addseller.jsp?error";
-        }
-        else
-        {
-            if(flag.equals("true"))
-            {
-                boolean check = UserAccountController.addSeller(idList);
+				// 실패
+				if(check == false)
+				{
+					nextURL = "addseller.jsp?error";
+				}
+				// 성공
+				else
+				{
+					nextURL = "addseller.jsp?success";
+				}
+			}
+		}
+		else
+		{
+			if(idList == null)
+			{
+				nextURL = "addseller.jsp?rejecterror";
+			}
+			else
+			{
+				boolean check = UserAccountController.rejectSeller(idList);
 
-                // 실패
-                if(check == false)
-                {
-                    nextURL = "addseller.jsp?error";
-                }
-                // 성공
-                else
-                {
-                    nextURL = "addseller.jsp?success";
-                }
-            }
-            else
-            {
-                boolean check = UserAccountController.rejectSeller(idList);
-
-                // 실패
-                if(check == false)
-                {
-                    nextURL = "addseller.jsp?error";
-                }
-                // 성공
-                else
-                {
-                    nextURL = "addseller.jsp?rejectsuccess";
-                }
-            }
-        }
+				// 실패
+				if(check == false)
+				{
+					nextURL = "addseller.jsp?rejecterror";
+				}
+				// 성공
+				else
+				{
+					nextURL = "addseller.jsp?rejectsuccess";
+				}
+			}
+		}
+        
 
         response.sendRedirect(nextURL);
     %>

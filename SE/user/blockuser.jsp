@@ -51,6 +51,20 @@
                     <tbody>
                    <%
                         int no = 0;
+						
+						if(idList.size() == 0)
+						{
+					%>
+					
+						<tr>
+                            <td colspan=7 style="text-align:center;"> 신고를 당한 사용자가 없습니다. </td>
+                        </tr>     
+					
+					
+					<%
+						}
+						
+						
                         for (String id :
                                 idList)
                         {
@@ -81,6 +95,7 @@
                                 else
                                 {
                     %>
+						<tr>
                             <td> </td>
                             <td> </td>
                             <td> <%=id%> </td>
@@ -88,6 +103,7 @@
                             <td> <%=reportDateList.get(i)%> </td>
                             <td> <%=reportReasonList.get(i)%> </td>
                             <td> <%=reportContentList.get(i)%> </td>
+						</tr> 
 
                     <%
                                     

@@ -16,25 +16,13 @@
 <%
 	try
 	{
-%>
-		장바구니에서 제거되었습니다. <br><br>
-		
-		<form action = "<%= postPageUrl%>">
-			<button> 확인 </button>
-		</form>
-<%
+		response.sendRedirect("/SE/item/order_list.jsp?deleteSuccess");
 	}
 	
 	catch (Exception e)
 	{
 		out.println("Class name : " + e.getStackTrace().getClass().getName() + "<br>");
 		out.println(e.toString());
+		response.sendRedirect("/SE/item/order_list.jsp?deleteFailed");
 	}
 %>
-	</div>
-
-<%@include file="/common/sideMenu.jsp"%>
-<%@include file="/common/footer.jsp"%>
-
-</body>
-</html>

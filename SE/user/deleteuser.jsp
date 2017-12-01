@@ -94,14 +94,12 @@
                         <tr>
                             <th>사용자 ID</th>
                             <th>이름</th>
-                            <th>신고 접수일 - 업데이트 바람</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>                            
                             <td> <%=search_id%> </td>
-                            <td> <%=name%> </td>
-                            <td> <a href="#stay_here" data-placement="right" data-toggle="tooltip" title="2017년 11월 16일 17시 08분 12초">1주 전</a> </td>
+                            <td> <%=name%> </td>                            
                         </tr>                         
                     </tbody>
                 </table>
@@ -148,11 +146,5 @@
         %>
     </div>
 </div>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
-</script>
 
 <%@include file="/common/footer.jsp"%>

@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="main-login main-center">
-                <form method="post" action = "item_update.jsp" onsubmit="return validateForm()">
+                <form method="post" action = "item_update.jsp" onsubmit="return validateForm()" enctype="multipart/form-data">
                     
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">물품 명</label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-inbox" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="name" id="name" value = "<%= target.name %>" placeholder="물품 이름을 입력하세요." autocomplete="off"/>
                             </div>
                         </div>
@@ -49,9 +49,8 @@
                         <label for="itemtype" class="cols-sm-2 control-label"> 물품 타입 </label>
                         <div class = "cols-sm-10">
 							<div class = "input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-tag" aria-hidden="true"></i></span>
 								<select class="form-control" name = "itemtype" id = "itemtype" value = "<%= target.getType() %>">
-									<option> Select type </option>
 									<option> Patent </option>
 									<option> Copyright </option>
 								</select>
@@ -71,7 +70,7 @@
                         <label for="regid" class="cols-sm-2 control-label"> 특허 / 저작권 출원 번호 </label>
                         <div class="cols-sm-10">
                             <div class="input-group">						
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-qrcode" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="regid" id="regid"  placeholder="출원 번호 혹은 등록 번호를 입력해주세요." autocomplete="off" readonly value = "<%= target.getRegId()%>"/>
                             </div>
                         </div>
@@ -84,11 +83,15 @@
                     </div>
 
 					<div class="form-group">
-                        <label for="image" class="cols-sm-2 control-label"> 이미지 위치 </label>
+                        <label for="image" class="cols-sm-2 control-label"> 이미지 </label>
                         <div class="cols-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" name="image" id="image"  placeholder="이미지를 업로드 해주세요" autocomplete="off" value = "<%=target.itemImage%>"/>
+							<div class = "input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control"  readonly value = "<%= target.itemImage %>"/>
+							</div>
+							
+                            <div class="form-group">
+								<input type="file" accept="image/jpeg/png" class="form-control" name="image" id="image"  placeholder="이미지를 업로드 해주세요" autocomplete="off"/>
                             </div>
                         </div>
                     </div>
@@ -97,7 +100,7 @@
                         <label for="price" class="cols-sm-2 control-label"> 가격 </label>
                         <div class="cols-sm-10">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt" aria-hidden="true"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd" aria-hidden="true"></i></span>
                                 <input type="text" class="form-control" name="price" id="price"  placeholder="가격을 입력해주세요" autocomplete="off" required value = "<%= target.price%>"/>
                             </div>
                         </div>
@@ -112,8 +115,8 @@
 					<div class="form-group">
                         <label for="explanation" class="cols-sm-2 control-label"> 설명 </label>
                         <div class="cols-sm-10" style = "text-align : left;">
-							<div class="input-group">
-								<textarea rows="4" cols="50" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요."><%= target.explanation %></textarea>
+							<div class="form-group">
+								<textarea class = "form-control" rows="4" cols="50" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요."><%= target.explanation %></textarea>
 							</div>
                         </div>
                     </div>
@@ -240,7 +243,7 @@ function validateForm()
 		return false;
 	}
 	
-	$('#submit').text("회원 가입 중...");
+	$('#submit').text("물품 수정 중...");
 	$('#submit').prop('disabled', true);
 	return true;
 }

@@ -23,14 +23,55 @@ function movePage(str)
 	String LoginedUser = (String)session.getAttribute("sessionID");
 	
     ArrayList<Item> itemList = ItemController.searchItem("", null, 0, "Registration", null);
-	
-	
 %>
 
 <div class="container">
 	<div class = "col-sm-10 col-md-offset-1">
     <div class="row">
         <h2> 물품 승인 대기 리스트 </h2>
+		
+<%
+            if(request.getParameter("item_deleteSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 해당 물품 신청 </strong>을 거절하였습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_deleteFailed") != null)
+            {
+%>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong> 물품 신청 반려가 </strong> 실패하였습니다.
+            </div>
+<%
+            }
+%>
+
+
+
+<%
+            if(request.getParameter("item_acceptSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 해당 물품 신청 </strong>을 승인하였습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_acceptFailed") != null)
+            {
+%>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <strong> 물품 신청 승인에 </strong> 실패하였습니다.
+            </div>
+<%
+            }
+%>
+		
         <hr />
         <div class="table-responsive">
             <form class="form-inline" name = "mainForm" method="post">

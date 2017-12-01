@@ -19,9 +19,72 @@
 	<div class = "col-sm-10 col-md-offset-1">
     <div class="row">
         <h2> 물품 관리 </h2>
+		
+<%
+            if(request.getParameter("item_deleteSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong>선택한 물품</strong>이 삭제되었습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_deleteFailed") != null)
+            {
+%>
+			<div class="alert alert-alert alert-dismissable fade in">
+                <strong>삭제</strong>에 실패하였습니다.
+            </div>
+<%
+            }
+
+			
+			
+			
+			
+			
+            if(request.getParameter("item_registerSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 선택한 물품 </strong>이 등록 신청이 되었습니다. 관리자의 신청이 들어오면 판매가 가능해집니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_registerFailed") != null)
+            {
+%>
+			<div class="alert alert-alert alert-dismissable fade in">
+                <strong> 선택한 물품 </strong>의 등록 신청이 실패했습니다.
+            </div>
+<%
+            }
+
+
+
+            if(request.getParameter("item_updateSuccess") != null)
+            {
+%>
+			<div class="alert alert-success alert-dismissable fade in">
+                <strong> 선택한 물품 </strong>의 정보가 수정되었습니다.
+            </div>
+<%
+            }
+
+            if(request.getParameter("item_updateFailed") != null)
+            {
+%>
+			<div class="alert alert-alert alert-dismissable fade in">
+                <strong> 선택한 물품 </strong>의 수정이 실패했습니다.
+            </div>
+<%
+            }
+%>
         <hr />
-        <div class="table-responsive">
-            <form class="form-inline" action="item_delete.jsp" method="post">
+		<form class="form-inline" action="item_delete.jsp" method="post">
+			<div class="table-responsive">
 		    	<table class="table table-striped table-hover table-bordered">
                     <thead>
 						<tr>
@@ -111,8 +174,8 @@
 				<input type="submit" class="btn btn-success" value="선택한 물품 삭제" />
 				<input type="reset" class="btn btn-default" value = "선택 취소" />
 				<input type="button" class="btn btn-default" value = "메인 화면으로" onclick = "location.href = '/SE/index.jsp'" />
-            </form>
-        </div>
+			</div>
+		</form>
     </div>
 	</div>
 </div>

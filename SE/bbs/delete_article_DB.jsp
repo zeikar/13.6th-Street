@@ -55,7 +55,6 @@
 	<% 
     	  }
     	}
-    	response.sendRedirect("bbs.jsp"); // 게시글 목록으로 리턴
     	stmt.close();
     	conn.close();
     %>

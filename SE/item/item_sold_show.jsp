@@ -7,6 +7,7 @@
 <%@include file="/common/sideMenu.jsp"%>
 
 <%	
+	int number = 0;
 	String LoginedUser = (String)session.getAttribute("sessionID");
 	
     ArrayList<Pay> itemList = PayController.getSellerSellList(LoginedUser);
@@ -31,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>					
-<%
+<%						
 						if (itemList.size() == 0)
 						{
 %>
@@ -45,16 +46,14 @@
 						
 						else
 						{
-							int no = 0;
-							
 							for (Pay itor : itemList)
 							{
-								no++;
+								number++;
 %>
                         <tr>
-							<td> No.<%= no %></td>
+							<td> No.<%= number %></td>
 							<td> <%= ItemController.getItem(itor.getItemId()).name %> </td>
-							<td> <%= UserAccountController.getUserName(itor.getSellerId()) %></td>
+							<td> <%= UserAccountController.getUserName(itor.getUserId()) %></td>
                             <td> <%= itor.price %> </td>
 							
 							<td> <%= itor.payDate %> </td>
@@ -62,7 +61,7 @@
                     <%
 							}
 					%>
-						<input type = "hidden" name = "maxNumber" value = <%=no%>>
+						<input type = "hidden" name = "maxNumber" value = <%=number%>>
 					<%
 						}
                     %>

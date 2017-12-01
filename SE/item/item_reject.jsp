@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@include file="/user/admincheck.jsp"%>
 <%@include file="/common/header.jsp"%>
 
 
@@ -26,28 +27,8 @@
 	}
 	
 	if (checker)
-	{
-%>
-	<div style = "text-align : center;">
-		선택한 물품이 반려되었습니다. <br><br>
-<%
-	}
+		response.sendRedirect("item_reg_list.jsp?item_deleteSuccess");
 	
 	else
-	{
+		response.sendRedirect("item_reg_list.jsp?item_deleteFailed");
 %>
-	<div style = "text-align : center;">
-		선택한 물품 반려가 실패하였습니다. <br><br>
-<%
-	}
-%>
-		<form action = "/SE/item/item_reg_list.jsp">
-			<button> 확인 </button>
-		</form>
-	</div>
-
-<%@include file="/common/sideMenu.jsp"%>
-<%@include file="/common/footer.jsp"%>
-
-</body>
-</html>

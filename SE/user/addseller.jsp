@@ -12,6 +12,17 @@
     <div class="row">
         <h2>판매자 등록 승인</h2>
 
+		
+		<%
+         if(request.getParameter("rejecterror") != null)
+        {
+        %>
+        <div class="alert alert-danger alert-dismissable fade in">
+            <strong> 판매자 등록 승인 거절 실패!</strong> 다시 확인해 주세요.
+        </div>
+        <%
+        }
+        %>
         <%
         if(request.getParameter("error") != null)
         {
@@ -61,6 +72,19 @@
                     <tbody>
                     <%
                         int no = 0;
+						
+						if(idList.size() == 0)
+						{
+					%>
+					
+						<tr>
+                            <td colspan=6 style="text-align:center;"> 판매자 등록 신청한 사용자가 없습니다. </td>
+                        </tr>     
+					
+					
+					<%
+						}
+						
                         for (String id :
                                 idList)
                         {

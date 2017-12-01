@@ -47,7 +47,20 @@
                     </thead>
                     <tbody>
                     <%
-                        int no = 0;
+                        int no = 0;						
+						
+						if(idList.size() == 0)
+						{
+					%>
+					
+						<tr>
+                            <td colspan=4 style="text-align:center;"> 제재를 당한 사용자가 없습니다. </td>
+                        </tr>     
+					
+					
+					<%
+						}
+						
                         for (String id :
                                 idList)
                         {

@@ -2,6 +2,8 @@
 
 <%@include file="/common/header.jsp"%>
 
+<%@include file="/user/admincheck.jsp"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>
 
@@ -23,28 +25,8 @@
 	}
 	
 	if (ItemController.confirmItem(itemIds))
-	{
-%>
-	<div style = "text-align : center;">
-		선택한 물품들이 승인되었습니다. <br><br>
-<%
-	}
+		response.sendRedirect("item_reg_list.jsp?item_acceptSuccess");
 	
 	else
-	{
+		response.sendRedirect("item_reg_list.jsp?item_acceptFailed");
 %>
-	<div style = "text-align : center;">
-		선택한 물품들이 승인에 실패하였습니다. <br><br>
-<%
-	}
-%>
-		<form action = "/SE/item/item_reg_list.jsp">
-			<button> 확인 </button>
-		</form>
-	</div>
-
-<%@include file="/common/sideMenu.jsp"%>
-<%@include file="/common/footer.jsp"%>
-
-</body>
-</html>
