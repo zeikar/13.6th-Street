@@ -29,9 +29,9 @@
 
 
 <%
-	String requestURL = request.getRequestURL().toString();
-	String queryString = request.getQueryString();
-	if (queryString != null) requestURL += "?" + queryString;
+	String requestURL1 = request.getRequestURL().toString();
+	String queryString1 = request.getQueryString();
+	if (queryString1 != null) requestURL1 += "?" + queryString1;
 %>
     
 <nav class="navbar navbar-inverse">
@@ -42,7 +42,7 @@
 		</div>	
 		<%
 		// 인덱스아니면 작은 검색창
-		if(requestURL.indexOf("index.jsp") == -1)
+		if(requestURL1.indexOf("index.jsp") == -1)
 		{
 		%>
 
@@ -66,7 +66,7 @@
 		{
 		%>
 		<ul class="nav navbar-nav navbar-right">
-			<li> <a href="/SE/user/login.jsp?next=<%=requestURL%>"> <span class="glyphicon glyphicon-log-in"></span> 로그인 </a> </li>
+			<li> <a href="/SE/user/login.jsp?next=<%=requestURL1%>"> <span class="glyphicon glyphicon-log-in"></span> 로그인 </a> </li>
 			<li> <a href="/SE/user/register.jsp"> <span class="glyphicon glyphicon-user"></span> 회원 가입 </a> </li>
 		</ul>
 		<%
@@ -94,6 +94,10 @@
 				<ul class="dropdown-menu">
 					<li> <a href="/SE/user/pointcharge.jsp"> <span class="glyphicon glyphicon-credit-card"></span> 포인트 충전 </a> </li>
 					<li> <a href="/SE/user/pointrefund.jsp"> <span class="glyphicon glyphicon-transfer"></span> 포인트 환급 </a> </li>
+					
+					<li class="divider"></li>
+
+					<li> <a href="/SE/bbs/message.jsp"> <span class="glyphicon glyphicon-envelope"></span> 쪽지 </a> </li>
 					
 					<li class="divider"></li>
 <%
@@ -150,7 +154,7 @@
 <%
 if(request.getParameter("loginsuccess") != null)
 {
-	if(requestURL.indexOf("index.jsp") == -1)
+	if(requestURL1.indexOf("index.jsp") == -1)
 	{
 %>
 <div style="margin-top: 30px;" class="container">
@@ -175,8 +179,14 @@ if(request.getParameter("loginsuccess") != null)
 }
 %>
 <script>
-setTimeout(myFunction, 1500);
+setTimeout(myFunction, 1000);
+setTimeout(deleteDiv, 1700);
 function myFunction() {
-    $('#fkmsg').css('display', 'none');
+    //$('#fkmsg').css('display', 'none');
+	$('#fkmsg').fadeTo(700, 0);
+}
+function deleteDiv()
+{
+    $('#fkmsg').css('z-index', -1);
 }
 </script>

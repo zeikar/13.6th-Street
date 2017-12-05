@@ -4,7 +4,7 @@
 	if(session.getAttribute("sessionID") == null ||
         !UserAccountController.isUserSeller((String)session.getAttribute("sessionID")))
 	{
-		response.sendRedirect("/SE/index.jsp?admin");
+		response.sendRedirect("/SE/index.jsp?seller");
         return;
 	}
 %>

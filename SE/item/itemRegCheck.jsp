@@ -1,4 +1,5 @@
-<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %><%
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
+<%
     // 인코딩 처리
     request.setCharacterEncoding("utf-8"); 
     

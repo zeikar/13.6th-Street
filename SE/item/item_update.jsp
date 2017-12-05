@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.oreilly.servlet.MultipartRequest, com.oreilly.servlet.multipart.DefaultFileRenamePolicy, java.util.*"%>
 
+<%@include file = "/item/sellerCheck.jsp"%>
 <%@include file="/common/header.jsp"%>
 
 

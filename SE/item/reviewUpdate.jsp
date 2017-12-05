@@ -2,6 +2,7 @@
 
 <%@ page import="java.net.URLEncoder" %>
 
+<%@include file = "/user/logincheck.jsp"%>
 <%@include file="/common/header.jsp"%>
 
 <%@page import="java.util.ArrayList"%>
@@ -17,6 +18,7 @@
 	
 	String itemId = request.getParameter("item_id");
 	String context = new String(request.getParameter("reviewContext").getBytes("8859_1"), "UTF-8");
+	String reviewDate = new String(request.getParameter("prev_date").getBytes("8859_1"), "UTF-8");
 	
 	/**/
 	String search_value = request.getParameter("search_text");
@@ -61,8 +63,8 @@
 	
 	/**/
 	
-	checker = ReviewController.editReview(reqUserId, itemId, context);
-	
+	checker = ReviewController.editReview(reqUserId, itemId, reviewDate, context);
+
 	if (checker)
 	{
 		response.sendRedirect("item_show_detail.jsp?reviewUpdateSuccess&itemId=" + itemId + "&" + url);

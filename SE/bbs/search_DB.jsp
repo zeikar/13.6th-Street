@@ -2,6 +2,8 @@
 <%@include file="/common/header.jsp"%>
 <%@include file="/common/sideMenu.jsp"%>
 <%@ page import = "java.sql.*"%>
+<%@ page import = "java.net.URLDecoder" %> 
+<% //request.setCharacterEncoding("euc-kr"); // 인코딩 %>
 
 <style>
 #search{
@@ -33,15 +35,17 @@ width: 20%;
     </thead>
     
     <% 
-    	request.setCharacterEncoding("utf-8"); // 인코딩 
     	int id;
     	int row = 0;
     	
         // 넘어오는 것 : 옵션 (글쓴이, 제목, 내용), - where ~ like
         // 검색어 '%검색어%'
         String option = request.getParameter("option");
+    	option = new String(option.getBytes("ISO-8859-1"), "UTF-8");
     	String article_option = "";
         String search = request.getParameter("searching");
+        search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
+    	// 망할 인코딩..^^;
     	
         if (option.equals("글쓴이")){
             article_option = "article_user_id";
@@ -65,6 +69,8 @@ width: 20%;
            stmt = conn.createStatement(); // 질의를 위한 Stmt 객체 생성.
            String sql = "select * from Article where " + article_option + 
            " like '%" + search + "%' order by article_id asc";
+           //out.print(sql);
+           //out.println(option);
            // 검색하고 글 번호 내림차순으로 글들 정렬. 
            rs = stmt.executeQuery(sql);
         } // 데이터의 접근 권한 획득. 
@@ -121,7 +127,7 @@ width: 20%;
   <span class="glyphicon glyphicon-search"></span> 검색
 </button>
 <div id="search" class="collapse">
-<form name ="search" method = "post" action="search.jsp">
+<form name ="search" method = "post" action="search_DB.jsp">
 <div class="form-group">
 <label for="sel1"></label>
   <select class="form-control" name ="option" id="option">

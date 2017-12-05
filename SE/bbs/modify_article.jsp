@@ -15,6 +15,7 @@ function restrict(){
 		}
 	else{ // 입력되었으면 전송.
 		$("#Articleform").submit();
+		alert("수정 완료!");
 	}
 }
 </script>
@@ -48,13 +49,17 @@ function restrict(){
     }
     
     pw = request.getParameter("password");
-    String nextURL = "../index.jsp?error";
     // 기본값은 강제리턴. 
     while(rs.next()) {
         if(!pw.equals(rs.getString("article_password")))
         { // 입력된 비밀번호와 답을 비교해 보고 아니면 강제로 리턴시킨다. 
-            response.sendRedirect(nextURL);
         %>
+        
+        <div class="alert alert-danger alert-dismissable fade in" align = "center">
+      			 <strong>비밀번호가 틀렸습니다! 다시 입력해 주세요.</strong> 1초 뒤 돌아갑니다.
+    		</div>
+        <meta http-equiv="refresh" content="1;url=modify_article_pw.jsp?id=<%=id%>">
+        
         <% 
         }
     	else
@@ -112,8 +117,9 @@ function restrict(){
  	</a>
 
 </div>
+		
 	<% 
-    	  }
+    	  }  
     	}
 	stmt.close();
 	conn.close();

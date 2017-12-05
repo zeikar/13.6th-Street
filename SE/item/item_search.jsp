@@ -132,11 +132,11 @@ function price_init()
             }
 			
 			
-			if (request.getParameter("LoginFailed") != null)
+			if (request.getParameter("SellerOrderInterrupt") != null)
 			{
 %>
 			<div class="alert alert-danger alert-dismissable fade in">
-                <strong> 로그인 </strong> 하세요!!
+                <strong> 판매자가 본인의 물품 </strong>을 구입할 수 없습니다!
             </div>
 <%
 			}
@@ -288,16 +288,40 @@ function price_init()
 				로 상세 검색한 결과입니다.
 <%
 			}
-		}
+		}		
 		for (Item itor : searchList)
 		{
+			String options = "itemId=" + itor.getId() + "&search_text=" + search_value;
+			
+			if (!search_option_type.equals("All"))
+				options = options + "&search_type=" + search_option_type;
+			
+			if (maxPrice != 0)
+				options = options + "&search_price=" + maxPrice;
+			
+			if (search_option_seller_id != null)
+				options = options + "&search_seller_id=" + search_option_seller_id;
 %>
 						<div class = "table-container">
 							<table class="table table-filter">
 								<tbody>
 									<tr class = "itemTable">
 										<td>
-											<div class = "media">
+<%
+			if (!searchFlag)
+			{
+%>
+											<div class = "media" onclick = "location.href = '/SE/item/item_show_detail.jsp?itemId=<%=itor.getId()%>&search_text=<%=search_value%>'">
+<%
+			}
+			
+			else
+			{
+%>
+											<div class = "media" onclick = "location.href = '/SE/item/item_show_detail.jsp?itemId=<%=itor.getId()%>&search_text=<%=search_value%>&<%=options%>'">
+<%
+			}
+%>
 												<div class = "media-left">
 													<img src = "/SE/pictures/Item/<%= itor.itemImage %>" style = "width : 120px; height : 120px;" class="media-photo">
 												</div>
@@ -321,17 +345,6 @@ function price_init()
 										
 										<td class = "align-middle">
 <%
-			String options = "itemId=" + itor.getId() + "&search_text=" + search_value;
-			
-			if (!search_option_type.equals("All"))
-				options = options + "&search_type=" + search_option_type;
-			
-			if (maxPrice != 0)
-				options = options + "&search_price=" + maxPrice;
-			
-			if (search_option_seller_id != null)
-				options = options + "&search_seller_id=" + search_option_seller_id;
-
 			if (LoginedUser != null)
 			{
 %>

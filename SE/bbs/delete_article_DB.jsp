@@ -1,7 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/header.jsp"%>
 <%@ page import = "java.sql.*"%>
-
 <%
     Connection conn = null;
     Statement stmt = null;
@@ -32,13 +31,15 @@
     }
     
     pw = request.getParameter("password");
-    String nextURL = "../index.jsp?error";
     // 기본값은 강제리턴. 
     while(rs.next()) {
         if(!pw.equals(rs.getString("article_password")))
-        { // 입력된 비밀번호와 답을 비교해 보고 아니면 강제로 리턴시킨다. 
-            response.sendRedirect(nextURL);
+        { // 입력된 비밀번호와 답을 비교해 보고 아니면 강제로 리턴시킨다.      
         %>
+            <div class="alert alert-danger alert-dismissable fade in" align = "center">
+      			 <strong>비밀번호가 틀렸습니다! 다시 입력해 주세요.</strong> 1초 뒤 돌아갑니다.
+    		</div>
+        <meta http-equiv="refresh" content="1;url=delete_article_pw.jsp?id=<%=id%>">
         <% 
         }
     	else
@@ -52,12 +53,18 @@
     	    	  		out.println("오류가 발생했습니다!");
     	    	}
     	%>
-	<% 
-    	  }
+    	    <div class="alert alert-danger alert-dismissable fade in" align = "center">
+      			 <strong>삭제 완료!</strong>
+    		</div>
+    		<meta http-equiv="refresh" content="1;url=bbs.jsp">
+	<%   
+    	    }
     	}
+    
     	stmt.close();
     	conn.close();
     %>
+    
 
 <%@include file="/common/footer.jsp"%>
 

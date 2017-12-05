@@ -52,7 +52,7 @@ width: 50%
     stmt3 = conn.createStatement(); // 질의를 위한 Stmt 객체 생성.
     String sql = "select * from Article where article_id = " + id;
     String sql2 = "update Article set article_hits = article_hits + 1 where article_id = " + id;  
-    String sql3 = "select * from Comment where comment_board_id = " + id; 
+    String sql3 = "select * from Comment where comment_board_id = '" + id + "'order by comment_date desc"; 
     // "select * from Article order by article_id asc";
     // 검색하고 내림차순으로 글들 정렬. 
     // 누른 글 번호의 댓글을 가져욘다. 
@@ -84,12 +84,10 @@ width: 50%
  	<h2>글 열람</h2>
 	<div> <!-- class = "row" 하면 벌어짐. -->
 		<div class="alert alert-info alert-dismissable col-sm-6" id = "Author">
- 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   			<strong> 작성자 : <%= user %> </strong>
 		</div>
 
 		<div class="alert alert-info alert-dismissable col-sm-6" id = "Date" style="background-color:skyblue">
- 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   			<strong> 작성일 : <%= date %></strong>  
 		</div>
 	</div>
@@ -110,6 +108,15 @@ width: 50%
 	</button>
  	</a>
 	
+	
+	<%
+  	String what;
+  	what = (String)session.getAttribute("sessionID");
+  	if(what == null){what = "";}
+  	if (what.equals(user)) {
+      // 글작성자와 동일한 아이디일 경우에만 수정/삭제 가능
+  	%>
+	
 	<a href="delete_article_pw.jsp?id=<%= id %>">
  	<button type="button" class="btn btn-danger pull-right btn-sm"> 글 삭제 </button>
  	</a>
@@ -118,6 +125,8 @@ width: 50%
  	<a href="modify_article_pw.jsp?id=<%= id %>">
   	<button type="button" class="btn btn-danger pull-right btn-sm"> 글 수정 </button>  
   	</a>
+  	
+  	<%} %>
   	
 	<%
 		/*
@@ -161,11 +170,12 @@ width: 50%
 	  	<div id="<%=num%>" class="collapse"> <!-- 수정링! -->
 	  <div class="row">
 	    <hr/>
-		<form name = "modify" action = "comment_modify_DB.jsp" method = "post">
+		<form action = "comment_modify_DB.jsp" method = "post">
 			<div class = "col-sm-8">				
-				<textarea class = "form-control" id = "modifyContext<%=3 %>>" name = "modifyContext" style="resize:none" required></textarea>
+				<textarea class = "form-control" id = "modifyContext" name = "modifyContext" style="resize:none" required></textarea>
 			</div>
-			<!-- 업데이트니까 내용만 보내면 됨. -->
+			<input type = "hidden" id = "Article_id" name = "Article_id" value = "<%= id %>">
+			<input type = "hidden" id = "date" name = "date" value = "<%= rs2.getString("comment_date")%>">
 			<div class = "col-sm-2">
 				<input type = "submit" class = "form-control" value = "댓글 수정"> 
 			</div>
@@ -185,6 +195,15 @@ width: 50%
 	%>
 	<!-- 코멘트 while()할 곳. -->
 	
+
+	<%
+	  String test;
+	  test = (String)session.getAttribute("sessionID");
+	  if (test != null && test.length() != 0) {
+	      // 값이 있는 경우 처리
+	 %>
+
+	
 	<!-- 코멘트 다는 곳. -->
 	<div class="row">
 	  <hr/>
@@ -202,6 +221,11 @@ width: 50%
 		</form>
  	</div>
  	<!-- 코멘트 다는 곳. -->
+ 	
+ 	<% 
+	  }
+ 	%>
+ 	
  </div>
 	
 	<%@include file="/common/footer.jsp"%>

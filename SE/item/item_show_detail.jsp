@@ -339,7 +339,7 @@
 					<form action = "/SE/item/reviewDelete.jsp?<%=url%>" method = "post">
 						<input type = "hidden" name = "itemId" value = "<%= itor.getItemId() %>">
 						<input type = "hidden" name = "userId" value = "<%=itor.getUserId()%>">
-						<input type = "hidden" name = "review_date" value = "<%=itor.reviewDate%>">
+						<input type = "hidden" name = "review_date" value = "<%=itor.reviewDate%>" id = "prevDate<%=no%>">
 						<input class="btn btn-danger" id = "deleteButton<%=no%>" type = "submit" value = "삭제">
 					</form>
 				</div>
@@ -361,6 +361,8 @@
 	<div class="row">
 		<hr />
 		<form name = "reviewForm" action = "reviewWrite.jsp?item_id=<%=itemId%>&<%=url%>" method = "post">
+			<input type = "hidden" id = "prev_date" name = "prev_date" value = "">
+			
 			<div class = "col-sm-10">				
 				<textarea class = "form-control" id = "reviewContext" name = "reviewContext" style="resize:none; height : 80px; overflow : hidden" required></textarea>
 			</div>
@@ -393,6 +395,8 @@ function editFunction(number)
 	var button = document.getElementById("reviewButton");
 	var cancelButton = document.getElementById("reviewCancelButton");
 	
+	var editHiddenDate = document.getElementById("prev_date");
+	
 	for (var i = 1; i <= <%=no%>; i++)
 	{			
 		var tempDiv = document.getElementById("review" + i);
@@ -412,6 +416,7 @@ function editFunction(number)
 		textTarget.value = "";
 		button.value = "리뷰 작성"
 		cancelButton.style.visibility = "hidden";
+		editHiddenDate = "";
 		
 		document.reviewForm.action = "reviewWrite.jsp?item_id=<%=itemId%>&<%=url%>";
 	}
@@ -423,10 +428,14 @@ function editFunction(number)
 		var divisionPart = document.getElementById("review" + number);
 		var editButton = document.getElementById("editButton" + number);
 		var deleteButton = document.getElementById("deleteButton" + number);
+		
+		var updateDate = document.getElementById("prevDate" + number);
 	
 		textTarget.value = context;
 		button.value = "리뷰 수정";
 		cancelButton.style.visibility = "visible";
+
+		editHiddenDate.value = updateDate.value;
 		
 		divisionPart.style.backgroundColor = "#EAEAEA";
 		

@@ -1,12 +1,31 @@
 <%@ page language = "java" contentType="text/html; charset=UTF-8" %>
 <%@ page import = "java.sql.*"%>
 <%@ page import = "java.util.Calendar"%>
-<%@ page import = "java.text.*"%>
+<%@ page import = "java.text.SimpleDateFormat"%>
+<%@include file="/common/header.jsp"%>
+
+
+<%
+  String test;
+  test = (String)session.getAttribute("sessionID");
+  if (test == null) {
+      // null이 허락되지 않은 접근을 할 경우, 
+  %>
+			<div class="alert alert-danger alert-dismissable fade in" align = "center">
+      			 <strong>로그인을 하지 않으면 접근할 수 없습니다!</strong>
+    		</div>
+    		<meta http-equiv="refresh" content="1;url=http://210.94.210.250:8080/SE/user/login.jsp">
+ <% 
+	}
+  else{
+ %>
+
 <html>
 <head>
     <title>글쓰기 JSP</title>
 </head>
 <body>
+
     <%
     // 인코딩 처리 
     request.setCharacterEncoding("utf-8");
@@ -50,12 +69,16 @@
     String content = request.getParameter("content"); // 내용 
     String pw = request.getParameter("password"); // 패스워드 
     String num2 = Integer.toString(num); // 글 번호를 문자로 변환.
-    Date date = new Date(Calendar.getInstance().getTimeInMillis());
+
+    Calendar cal = Calendar.getInstance();
+	SimpleDateFormat textFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	String articleDate = textFormat.format(cal.getTime());
+	
     // 현재 시간값 저장.
     int view = 0;
     
     String sql_insert = "INSERT INTO Article VALUES ('" + num2 + "','" + subject + "','" + view + "','" 
-           + date + "','" + pw + "','" + content + "','" + id + "')";
+           + articleDate + "','" + pw + "','" + content + "','" + id + "')";
     // 데이터 삽입
     try{
         stmt.executeUpdate(sql_insert);
@@ -71,6 +94,8 @@
     // out.println(num2 + subject + view + date + pw + content + id);
 
     %>
+    
+    <% } %>
 	
 </body>
 </html>

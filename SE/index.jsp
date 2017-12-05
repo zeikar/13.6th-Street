@@ -102,6 +102,18 @@ if(request.getParameter("admin") != null)
 <%
 }
 %>
+<%
+if(request.getParameter("seller") != null)
+{
+%>
+<div id="fkmsg" style="margin-top: 60px; z-index: 0" class="container navbar-fixed-top">
+  <div class="alert alert-danger">
+      <strong>에러!</strong> 판매자 권한이 필요합니다.
+  </div>
+</div>
+<%
+}
+%>
 
 <div class="jumbotron navbar-inverse text-center">
   <h1 style="color: #cdcdcd">Welcome To 13.6th Street!</h1>

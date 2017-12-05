@@ -3,6 +3,8 @@
 <%@include file="/common/sideMenu.jsp"%>
 <%@ page import = "java.sql.*"%>
 
+<% request.setCharacterEncoding("utf-8"); // 인코딩 %>
+
 <style>
 #search{
 width: 50%;
@@ -33,7 +35,6 @@ width: 20%;
     </thead>
     
     <% 
-    	request.setCharacterEncoding("utf-8"); // 인코딩
     	int id;
     	int row = 0;
     	String PageNum_temp = request.getParameter("PageNum");
@@ -48,8 +49,8 @@ width: 20%;
            Class.forName("com.mysql.jdbc.Driver");
            conn = DriverManager.getConnection(jdbcurl, "root", "capscaps12345");
            stmt = conn.createStatement(); // 질의를 위한 Stmt 객체 생성.
-           String sql = "select * from Article order by cast(article_id as unsigned)";
-           // "select * from Article order by article_id asc";
+           String sql = "select * from Article order by article_id desc";
+           // "select * from Article order by cast(article_id as unsigned)";
            // 검색하고 내림차순으로 글들 정렬. 
            rs = stmt.executeQuery(sql);
         } // 데이터의 접근 권한 획득. 
@@ -62,7 +63,7 @@ width: 20%;
            e.printStackTrace();
         }
         
-        rs.first(); // 처음 레코드로 이동!
+        rs.last(); // 처음 레코드로 이동!
         row = rs.getRow(); // 현재 레코드의 행 번호 반환! 즉 첫 레코드 번호를 row로.
         rs.beforeFirst(); // 처음 레코드의 이전으로 이동!
         
@@ -81,7 +82,7 @@ width: 20%;
         <td><%= rs.getString("article_date") %></td>
       </tr>
     <%
-    	row++;
+    	row--;
     }
     %>
   </table>
@@ -111,9 +112,9 @@ width: 20%;
 <label for="sel1"></label>
   <select class="form-control" name="option" id="option">
   	 <!-- 검색 옵션 -->
-    <option>글쓴이</option>
-    <option>제목</option>
-    <option>내용</option>
+    <option value="글쓴이">글쓴이</option>
+    <option value="제목">제목</option>
+    <option value="내용">내용</option>
   </select>
 </div>
   <div class="input-group" id ="search">
@@ -128,7 +129,10 @@ width: 20%;
   </div>
 </form>
  </div>
+
+ <% 
  
+ /*
   <div class="text-center">
   <ul class="pagination">
     <li class="active"><a href="#">1</a></li>
@@ -138,6 +142,8 @@ width: 20%;
     <li><a href="#">5</a></li>
   </ul>
   </div>
+  */
+%>
 </div>
 
 <%@include file="/common/footer.jsp"%>

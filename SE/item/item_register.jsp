@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@include file = "/item/sellerCheck.jsp"%>
 <%@include file="/common/header.jsp"%>
 
 <div class="container">
@@ -27,7 +28,7 @@
                             <ul>
 								<li id="name_duplicate" class="invalid"><strong>중복되지 않는</strong> 물품 명</li>
                                 <li id="name_valid" class="invalid"><strong>특수문자</strong>는 사용이 불가능합니다. </li>
-                                <li id="name_length" class="invalid">길이<strong>4 이상 20 이하</strong></li>
+                                <li id="name_length" class="invalid">길이<strong> 45자 이하</strong></li>
                             </ul>
                         </div>
                     </div>
@@ -102,7 +103,7 @@
                         <label for="explanation" class="cols-sm-2 control-label"> 설명 </label>
                         <div class="cols-sm-10" style = "text-align : left;">
 							<div class="input-group">
-								<textarea rows="4" cols="50" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요."> </textarea>
+								<textarea rows="4" cols="50" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요." style = "resize:none;"> </textarea>
 							</div>
                         </div>
                     </div>
@@ -138,7 +139,7 @@ $(document).ready(function(){
 		}
 
         //validate the length
-		if ( name.length < 1 || name.length > 20 ) {
+		if ( name.length < 1 || name.length > 45 ) {
 			$('#name_length').removeClass('valid').addClass('invalid');
 			
 		} else {

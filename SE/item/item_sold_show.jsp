@@ -3,6 +3,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page import="Pay.Pay"%>
 
+<%@include file = "/item/sellerCheck.jsp"%>
+
 <%@include file="/common/header.jsp"%>
 <%@include file="/common/sideMenu.jsp"%>
 

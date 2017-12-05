@@ -18,6 +18,21 @@ function restrict(){
 }
 </script>
 
+  <%
+  String test;
+  test = (String)session.getAttribute("sessionID");
+  if (test == null) {
+      // null이 허락되지 않은 접근을 할 경우, 
+  %>
+			<div class="alert alert-danger alert-dismissable fade in" align = "center">
+      			 <strong>로그인을 하지 않으면 접근할 수 없습니다!</strong>
+    		</div>
+    		<meta http-equiv="refresh" content="1;url=http://210.94.210.250:8080/SE/user/login.jsp">
+ <% 
+	}
+  else{
+ %>
+
 <div class="container">
  <h2>글 작성 및 수정</h2> 
 	<div class="alert alert-warning">
@@ -71,7 +86,9 @@ function restrict(){
  	</a>
 
 </div>
-
+<%
+  }
+%>
 
 <%@include file="/common/footer.jsp"%>
 

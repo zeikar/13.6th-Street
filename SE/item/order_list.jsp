@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@include file = "/user/logincheck.jsp"%>
+
 <%@ include file="/common/header.jsp"%>
 <%@include file="/common/sideMenu.jsp"%>
 
@@ -132,21 +134,7 @@ function selectItem(strId, itemId)
 		for (Order itor : orderList)
 			itor.orderItem = ItemController.getItem(itor.getItemId());
 		
-		if (LoginedUser == null)
-		{
-%>
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-									<tr>
-										<td>
-											장바구니 기능은 로그인 이후에 사용할 수 있습니다!
-										</td>
-									</tr>
-<%
-		}
-		
-		else if (orderList.size() == 0)
+		if (orderList.size() == 0)
 		{
 %>
 						<div class="table-container">
@@ -172,7 +160,7 @@ function selectItem(strId, itemId)
 %>
 										<tr class = "itemTable" id = "item<%= numbering%>th">
 											<td>
-												<div class = "media">
+												<div class = "media" onclick = "location.href = '/SE/item/item_show_detail.jsp?cart&itemId=<%=itor.orderItem.getId()%>'">
 													<div class = "media-left">
 														<img src = "/SE/pictures/Item/<%= itor.orderItem.itemImage %>" style = "width : 120px; height : 120px;" class="media-photo">
 													</div>
