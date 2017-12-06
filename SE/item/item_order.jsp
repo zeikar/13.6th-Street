@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file = "/user/logincheck.jsp"%>
-<%@include file="/common/header.jsp"%>
 
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>
 
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
 <%@ page import="Order.OrderController" contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.net.URLEncoder" %>
 

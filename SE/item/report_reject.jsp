@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="/user/admincheck.jsp"%>
-<%@include file="/common/header.jsp"%>
+
+<%@ page import="Report.ReportController" contentType="text/html; charset=UTF-8" %>
 
 <%@page import="java.util.ArrayList"%>
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>

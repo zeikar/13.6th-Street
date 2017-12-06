@@ -71,7 +71,7 @@ function restrict(){
             </td>
             <td>
                 <input name="receiver" id="receiver" class="form-control" type="text" size="70" maxlength="100" value="<%= request.getParameter("sender")%>"
-                >
+                readonly>
             </td>        
         </tr>
         <tr>

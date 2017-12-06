@@ -123,7 +123,7 @@
 		var windowSize = $(window).width();
 		var menuAll = $('#sideMenu_all');
 		
-		if (windowSize < 1000)
+		if (windowSize < 1300)
 			menuAll.css("visibility", "hidden");
 		
 		else
@@ -135,7 +135,7 @@
 		var windowSize = $(window).width();
 		var menuAll = $('#sideMenu_all');
 		
-		if (windowSize < 1000)
+		if (windowSize < 1300)
 			menuAll.css("visibility", "hidden");
 		
 		else

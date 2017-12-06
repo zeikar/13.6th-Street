@@ -1,6 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@include file = "/user/logincheck.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 
 <%@ page import="java.net.URLEncoder" %>
 
@@ -56,11 +54,6 @@
 	
 	if (iscart != null)
 		url = url + "&cart";
-	
-	out.write(reqUserId);
-	out.write(targetItem);
-	out.write(reason);
-	out.write(context);	
 	
 	if (ReportController.reportItem(reqUserId, targetItem, reason, context))
 	{

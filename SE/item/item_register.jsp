@@ -102,9 +102,9 @@
 					<div class="form-group">
                         <label for="explanation" class="cols-sm-2 control-label"> 설명 </label>
                         <div class="cols-sm-10" style = "text-align : left;">
-							<div class="input-group">
-								<textarea rows="4" cols="50" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요." style = "resize:none;"> </textarea>
-							</div>
+							
+								<textarea rows="4" class="form-control" name = "explanation" placeholder = "제품에 대한 설명을 입력해주세요." style = "resize:none;"> </textarea>
+						
                         </div>
                     </div>
                     
@@ -159,11 +159,11 @@ $(document).ready(function(){
 		var target = $(this).val();
 		
 		//validate price
-		if (target.match(/^[0-9]*$/))
-			$('#price_valid').removeClass('invalid').addClass('valid');
-		
-		else if (target.length < 1)
+		if (target.length < 1)
 			$('#price_valid').removeClass('valid').addClass('invalid');
+			
+		else if (target.match(/^[0-9]*$/))
+			$('#price_valid').removeClass('invalid').addClass('valid');
 		
 		else 
 			$('#price_valid').removeClass('valid').addClass('invalid');
@@ -179,17 +179,18 @@ $(document).ready(function(){
 	
 	
 	// for 출원 등록 번호
-	$('input[id=regid]').keyup(function() {
+	$('input[id=regid]').keyup(function()
+	{
 		var regid = $(this).val();
 		
 		regDuplicateCheck(regid);
 
         // validate the length
-		if ( regid.length < 1 || regid.length > 20 ) {
+		if ( regid.length < 1 || regid.length > 20 )
 			$('#reg_length').removeClass('valid').addClass('invalid');
-		} else {
+			
+		else
 			$('#reg_length').removeClass('invalid').addClass('valid');
-		}
 		
 	}).focus(function() {
 		$('#reg_info').show();
@@ -274,9 +275,9 @@ function nameDuplicateCheck(str)
 	function()
 	{
 		if (this.readyState == 4 && this.status == 200) 
-		{
+		{			
 			// name duplicate check
-			if ( this.responseText == "OK" )
+			if ( this.responseText.trim() == "OK" )
 				$('#name_duplicate').removeClass('invalid').addClass('valid');
 			
 			else
@@ -308,7 +309,7 @@ function regDuplicateCheck(str)
 		if (this.readyState == 4 && this.status == 200) 
 		{
 			// name duplicate check
-			if ( this.responseText == "OK" )
+			if ( this.responseText.trim() == "OK" )
 				$('#reg_duplicate').removeClass('invalid').addClass('valid');
 			
 			else

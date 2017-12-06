@@ -3,7 +3,6 @@
 <%@ page import="java.net.URLEncoder" %>
 
 <%@include file = "/user/logincheck.jsp"%>
-<%@include file="/common/header.jsp"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>

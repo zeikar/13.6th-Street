@@ -3,7 +3,6 @@
 <%@ page import="java.net.URLEncoder" %>
 
 <%@include file = "/user/logincheck.jsp"%>
-<%@include file="/common/header.jsp"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>
@@ -11,13 +10,13 @@
 <%@ page import="Review.ReviewController" contentType="text/html; charset=UTF-8" %>
 
 <%
-	request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("UTF-8");
 	
 	boolean checker = true;
 	String reqUserId = (String)session.getAttribute("sessionID");
 	
 	String itemId = request.getParameter("item_id");
-	String context = new String(request.getParameter("reviewContext").getBytes("8859_1"), "UTF-8");
+	String context = request.getParameter("reviewContext");
 	
 	/**/
 	String search_value = request.getParameter("search_text");

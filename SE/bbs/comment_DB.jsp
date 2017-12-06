@@ -54,7 +54,6 @@
     // request.getParameter("password");
     int rate = 0; // 추천수 
     
-    
     Calendar cal = Calendar.getInstance();
 	SimpleDateFormat textFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	String commentDate = textFormat.format(cal.getTime());

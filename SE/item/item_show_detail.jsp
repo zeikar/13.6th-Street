@@ -5,6 +5,7 @@
 <%@ include file="/common/header.jsp"%>
 
 <%@ page import="Item.Item"%>
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
 
 <%@ page import="Review.Review"%>
 <%@ page import="Review.ReviewController" contentType="text/html; charset=UTF-8" %>

@@ -2,7 +2,6 @@
 <%@ page import = "java.sql.*"%>
 <%@ page import = "java.util.Calendar"%>
 <%@ page import = "java.text.SimpleDateFormat"%>
-<%@include file="/common/header.jsp"%>
 
 
 <%

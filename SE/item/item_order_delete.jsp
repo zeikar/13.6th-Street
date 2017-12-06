@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file = "/user/logincheck.jsp"%>
-<%@include file="/common/header.jsp"%>
+
+<%@ page import="Order.OrderController" contentType="text/html; charset=UTF-8" %>
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -12,9 +13,7 @@
 	String postPageUrl = request.getParameter("postPage");
 	
 	OrderController.orderDelete(reqUserId, reqItemId);
-%>
-	<div style = "text-align : center;">
-<%
+
 	try
 	{
 		response.sendRedirect("/SE/item/order_list.jsp?deleteSuccess");

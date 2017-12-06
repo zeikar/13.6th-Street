@@ -10,8 +10,8 @@
     boolean checker = ItemController.checkDuplicateRegId(regNumber);
 
     if(!checker)
-        out.print("OK");
+        out.write("OK");
 	
     else
-        out.print("NO");
+        out.write("NO");
 %>

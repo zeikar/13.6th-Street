@@ -6,6 +6,8 @@
 <%@ page import="java.util.ArrayList"%>
 
 <%@ page import="Item.Item" contentType="text/html; charset=UTF-8" %>
+<%@ page import="user.UserAccountController" contentType="text/html; charset=UTF-8" %>
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
 
 <style>
 .itemTable:hover

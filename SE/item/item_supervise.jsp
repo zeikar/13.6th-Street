@@ -95,7 +95,8 @@
 						
                         <tr>
                             <th>
-                                <input type="checkbox" name="select-all" id="select-all" /> 전체 선택
+								All
+								<input type="checkbox" name="select-all" id="select-all" />
                             </th>
 							
 							<th>no.</th>
@@ -131,7 +132,7 @@
 								no++;
 %>
                         <tr>
-                            <td> <label><input type="checkbox" name="itemBox" value="<%= itor.getId() %>"/> 삭제 선택 </label> </td>
+                            <td> <label><input type="checkbox" name="itemBox" value="<%= itor.getId() %>"/> </label> </td>
 							<td> <%= no %> </td>
 							<td> <%= itor.getType() %></td>
 							

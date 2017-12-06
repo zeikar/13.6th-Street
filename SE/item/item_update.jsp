@@ -2,10 +2,9 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest, com.oreilly.servlet.multipart.DefaultFileRenamePolicy, java.util.*"%>
 
 <%@include file = "/item/sellerCheck.jsp"%>
-<%@include file="/common/header.jsp"%>
-
 
 <%@ page import="Item.Item"%>
+<%@ page import="Item.ItemController" contentType="text/html; charset=UTF-8" %>
 
 <%	
 	request.setCharacterEncoding("UTF-8");
@@ -27,7 +26,7 @@
 		fileName=req.getFilesystemName(formName);
 
 		if(fileName == null)
-			fileName "none.png";
+			fileName = "none.png";
 		
 		else
 		{  
@@ -59,7 +58,8 @@
 	target.setType(reqType);
 	target.setRegId(reqRegId);
 	
-	target.itemImage = fileName;
+	if (!fileName.equals("none.png"))
+		target.itemImage = fileName;
 	
 	target.price = reqPrice;
 	

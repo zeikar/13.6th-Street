@@ -67,7 +67,7 @@ function restrict(){
           비밀번호 입력
             </td>
             <td>
-                <input type="text" name="password" id="password" class="form-control" 
+                <input type="password" name="password" id="password" class="form-control" 
                 placeholder="비밀번호를 입력하세요. ">
             </td>    
         </tr>
